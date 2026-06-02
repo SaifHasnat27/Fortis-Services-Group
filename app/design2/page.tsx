@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -151,9 +152,9 @@ export default function Design2Page() {
                                 <p className="text-[var(--text-secondary)] font-light leading-relaxed mb-8">
                                     A Sydney home is a big investment. We bring three decades of experience so you can relax, knowing it's done right. From residential to commercial projects, our expert team delivers exceptional results every time.
                                 </p>
-                                <a href={BUSINESS.shopUrl} target="_blank" rel="noopener noreferrer">
+                                <Link href="/services">
                                     <Button variant="primary">View Our Services</Button>
-                                </a>
+                                </Link>
                             </div>
                         </Card3DHoverFit>
                     </div>

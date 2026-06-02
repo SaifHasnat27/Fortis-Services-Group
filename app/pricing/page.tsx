@@ -151,10 +151,10 @@ const contacts = [
     href: `mailto:${BUSINESS.email}`,
   },
   {
-    name: "Instagram",
-    desc: "Follow us for updates",
+    name: "WhatsApp",
+    desc: "Message us for support",
     icon: <Camera aria-hidden="true" className="w-8 h-8 stroke-1" />,
-    href: BUSINESS.instagram,
+    href: BUSINESS.whatsappLink,
   },
 ];
 
