@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -90,9 +91,9 @@ export default function HomeSpecialty() {
             <p className="text-[var(--text-secondary)] font-light leading-relaxed mb-8">
               We keep your business compliant and operational. From mandatory inspections and certifications to proactive maintenance that prevents costly downtime, our team has you covered.
             </p>
-            <a href={BUSINESS.shopUrl} target="_blank" rel="noopener noreferrer">
+            <Link href="/services">
               <Button variant="primary">View Our Services</Button>
-            </a>
+            </Link>
           </div>
         </Card3DHoverFit>
       </div>
