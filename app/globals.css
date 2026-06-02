@@ -1,0 +1,538 @@
+@import "tailwindcss";
+
+/* ====================================================================
+   EYE SPOT EYE CARE — Design Token System
+   Theme: Dark Luxury Editorial / Optical Precision
+   Temperature: Cool-dark unified (no warm/cool conflicts)
+   ==================================================================== */
+
+:root {
+
+  /* ------------------------------------------------------------------
+     PRIMITIVES — Raw scale, never used directly in components
+     ------------------------------------------------------------------ */
+
+  /* Neutrals — Cool-dark scale with barely-perceptible blue undertone.
+     Not visibly blue. Just cold, crisp, and premium.                   */
+  --color-white:        #FFFFFF;
+  --color-black:        #000000;
+  --color-neutral-50:   #F8FAFC;
+  --color-neutral-100:  #F1F5F9;
+  --color-neutral-200:  #E2E8F0;
+  --color-neutral-300:  #CBD5E1;
+  --color-neutral-400:  #94A3B8;
+  --color-neutral-600:  #4A5A7A;
+  --color-neutral-700:  #2E3F5C;
+  --color-neutral-800:  #1A2A42;
+  --color-neutral-850:  #111E33;   /* custom, between 800 and 900 */
+  --color-neutral-900:  #080D1C;
+  --color-neutral-950:  #040810;
+
+
+  /* Accent – clean, modern blue (no gold) */
+  --color-accent:       #3B82F6;        /* blue‑500 */
+  --color-accent-dim:   #2563EB;        /* blue‑600 */
+  --color-accent-glow:  rgba(59, 130, 246, 0.4);
+
+  /* ------------------------------------------------------------------
+     SEMANTIC TOKENS — What components actually consume
+     ------------------------------------------------------------------ */
+
+  /* · · · Backgrounds · · ·
+     RULE: Each level must be visibly distinct from adjacent levels.
+     Cards (primary) lift off the page (secondary). Always.             */
+
+--bg-secondary: #FFFFFF;
+--bg-primary: #F8FAFC;
+
+
+  --bg-third:           var(--color-neutral-700);  /* #27272C — Dropdowns / elevated UI    */
+  --bg-fourth:          var(--color-neutral-800);  /* #3A3A40 — Hover backgrounds          */
+  --bg-fifth:           var(--color-neutral-850);                  /* Selected / active states             */
+  --bg-pure-black:      var(--color-neutral-950);  /* #07070A — Pure deep black            */
+  --bg-solid-white:     var(--color-white);         /* #FFFFFF — White surfaces             */
+  --bg-dark:            var(--color-neutral-50);   /* #F7F7F8 — Reverse / light cards      */
+
+  --bg-design2p: linear-gradient(135deg, #F5F2ED 0%, #EAE6DF 50%, #F0EDE8 100%);
+  --bg-design2b: #E8E4DC;
+
+  --bg-design3p: linear-gradient(135deg, #2C3240 0%, #1E2330 50%, #252D3D 100%);
+  --bg-design3b: #1A1F2B;
+
+
+
+  /* · · · Text · · ·
+     All values are cool-temperature to match the background scale.     */
+
+  --text-primary:       var(--color-neutral-950);          /* #FFFFFF — Headlines, body            */
+  --text-secondary:     var(--color-neutral-900);   /* #B0B0B8 — Supporting body copy       */
+  --text-muted:         var(--color-neutral-400);   /* #78787F — Labels, captions           */
+  --text-inverse:       var(--color-neutral-900);   /* #0C0C10 — Dark text on light surface */
+  --text-accent:        var(--color-accent);        /* Gold — sparingly, for key labels     */
+
+  /* · · · Borders · · ·
+     Cool-toned. No warm brown. Precise, like an optical instrument.    */
+
+  --border: rgba(15, 20, 25, 0.18); /* Default card border — deep charcoal, medium */
+  --border-light:       rgba(255, 255, 255, 0.06);  /* Hairline divider                     */
+  --border-dark:        rgba(255, 255, 255, 0.28);  /* Hover / focus border — visible       */
+  --border-accent:      var(--color-accent-dim);    /* Gold border — for special elements   */
+
+  /* · · · Shadows · · ·
+     Directional, cool. Never warm-tinted.                              */
+
+  --shadow-card:        0 2px 12px rgba(0, 0, 0, 0.45),
+                        0 1px 3px rgba(0, 0, 0, 0.30);
+  --shadow-card-hover:  0 8px 32px rgba(0, 0, 0, 0.55),
+                        0 2px 8px rgba(0, 0, 0, 0.35),
+                        0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-modal:       0 24px 64px rgba(0, 0, 0, 0.70);
+  --shadow-btn:         0 2px 8px rgba(0, 0, 0, 0.40);
+  --shadow-btn-hover:   0 4px 16px rgba(0, 0, 0, 0.50);
+
+  /* · · · Typography · · ·
+     Cormorant Garamond = editorial luxury, optician heritage.
+     DM Sans = clean, modern, optical precision.                        */
+
+  --font-display:       'Cormorant Garamond', Georgia, serif;
+  --font-body:          'DM Sans', system-ui, sans-serif;
+
+  --font-size-hero:     clamp(3rem, 8vw, 6rem);
+  --font-size-display:  clamp(2.25rem, 4vw, 3rem);
+  --font-size-title:    clamp(1.5rem, 2.5vw, 2rem);
+  --font-size-body:     1rem;
+  --font-size-sm:       0.875rem;
+  --font-size-xs:       0.6875rem;
+
+  --leading-tight:      1.1;
+  --leading-snug:       1.2;
+  --leading-normal:     1.5;
+  --leading-relaxed:    1.65;
+  --leading-loose:      1.8;
+
+  --tracking-tight:     -0.02em;
+  --tracking-normal:    0em;
+  --tracking-wide:      0.08em;
+  --tracking-wider:     0.12em;
+  --tracking-widest:    0.18em;
+
+  /* · · · Layout & Spacing · · · */
+
+  --nav-height:              72px;
+  --section-padding-y:       5rem;
+  --container-max:           100%;
+  --container-max-width:     1920px;
+  --container-gutter-mobile: 5vw;
+  --container-gutter-tablet: 6vw;
+  --container-gutter-desktop:8vw;
+
+  /* · · · Shape · · ·
+     Zero radius = architectural, precise. Consistent with optical/luxury. */
+
+  --radius-card:        0px;
+  --radius-btn:         0px;
+  --radius-input:       0px;
+
+  /* · · · Transitions · · ·
+     Easing: ease-out for entrances, ease-in-out for hover states.      */
+
+  --transition-fast:    150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base:    250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow:    400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-reveal:  600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ====================================================================
+   TAILWIND @theme BRIDGE
+   Maps CSS variables → Tailwind utility classes
+   ==================================================================== */
+
+@theme inline {
+
+  /* Breakpoints */
+  --breakpoint-md: 1024px;
+
+  /* Primitive colors */
+  --color-white:          var(--color-white);
+  --color-black:          var(--color-black);
+  --color-neutral-50:     var(--color-neutral-50);
+  --color-neutral-100:    var(--color-neutral-100);
+  --color-neutral-200:    var(--color-neutral-200);
+  --color-neutral-300:    var(--color-neutral-300);
+  --color-neutral-400:    var(--color-neutral-400);
+  --color-neutral-600:    var(--color-neutral-600);
+  --color-neutral-700:    var(--color-neutral-700);
+  --color-neutral-800:    var(--color-neutral-800);
+  --color-neutral-850:    var(--color-neutral-850);
+  --color-neutral-900:    var(--color-neutral-900);
+  --color-neutral-950:    var(--color-neutral-950);
+  --color-accent:         var(--color-accent);
+  --color-accent-dim:     var(--color-accent-dim);
+
+  /* Semantic background colors */
+  --color-bg-primary:     var(--bg-primary);
+  --color-bg-secondary:   var(--bg-secondary);
+  --color-bg-third:       var(--bg-third);
+  --color-bg-fourth:      var(--bg-fourth);
+  --color-bg-fifth:       var(--bg-fifth);
+  --color-bg-pure-black:  var(--bg-pure-black);
+  --color-bg-dark:        var(--bg-dark);
+  
+  --color-bg-design2p:    var(--bg-design2p);
+  --color-bg-design2b:    var(--bg-design2b);
+  --color-bg-design3p:    var(--bg-design3p);
+  --color-bg-design3b:    var(--bg-design3b);
+
+  /* Semantic text colors */
+  --color-text-primary:   var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted:     var(--text-muted);
+  --color-text-inverse:   var(--text-inverse);
+  --color-text-accent:    var(--text-accent);
+
+  /* Semantic border colors */
+  --color-border:         var(--border);
+  --color-border-light:   var(--border-light);
+  --color-border-dark:    var(--border-dark);
+  --color-border-accent:  var(--border-accent);
+
+  /* Typography */
+  --font-display:         var(--font-display);
+  --font-body:            var(--font-body);
+
+  /* Spacing */
+  --spacing-nav:          var(--nav-height);
+  --spacing-section:      var(--section-padding-y);
+
+  /* Radii */
+  --radius-card:          var(--radius-card);
+  --radius-btn:           var(--radius-btn);
+
+  /* Transitions */
+  --transition-fast:      var(--transition-fast);
+  --transition-base:      var(--transition-base);
+  --transition-slow:      var(--transition-slow);
+}
+
+/* ====================================================================
+   BASE STYLES
+   ==================================================================== */
+
+body {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Cormorant renders better with slightly heavier smoothing */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Selection — gold tint, on brand */
+::selection {
+  background: var(--color-accent-glow);
+  color: var(--text-primary);
+}
+
+/* Scrollbar — minimal, on theme */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb  { background: var(--color-neutral-600); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-neutral-400); }
+
+/* ====================================================================
+   COMPONENT LAYER
+   ==================================================================== */
+
+@layer components {
+
+  /* ---- Cards ---- */
+
+  .card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+    transition:
+      transform    var(--transition-base),
+      box-shadow   var(--transition-base),
+      border-color var(--transition-base);
+  }
+
+  .card:hover {
+    transform:    translateY(-2px);
+    box-shadow:   var(--shadow-card-hover);
+  }
+
+  /* Light reverse card — for contrast sections */
+  .card-reverse {
+    background: var(--bg-dark);
+    color:      var(--text-inverse);
+    border:     1px solid rgba(0, 0, 0, 0.08);
+    padding:    2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+    transition:
+      transform  var(--transition-base),
+      box-shadow var(--transition-base);
+  }
+
+  .card-reverse:hover {
+    transform:  translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+  }
+
+  /* ---- Buttons ---- */
+
+  /* Primary — white on dark. The dominant CTA. */
+  .btn-primary {
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    gap:             0.5rem;
+    font-family:     var(--font-body);
+    font-weight:     500;
+    font-size:       var(--font-size-sm);
+    letter-spacing:  var(--tracking-wide);
+    text-transform:  uppercase;
+    background:      var(--bg-solid-white);
+    color:           var(--text-inverse);
+    border:          none;
+    border-radius:   var(--radius-btn);
+    padding:         0.8rem 1.75rem;
+    box-shadow:      var(--shadow-btn);
+    transition:
+      background  var(--transition-fast),
+      box-shadow  var(--transition-fast),
+      transform   var(--transition-fast);
+    cursor:          pointer;
+    text-decoration: none;
+    white-space:     nowrap;
+  }
+
+  .btn-primary:hover {
+    background:  var(--color-neutral-100);
+    box-shadow:  var(--shadow-btn-hover);
+    transform:   translateY(-1px);
+  }
+
+  .btn-primary:active {
+    background: var(--color-neutral-200);
+    transform:  scale(0.98);
+    box-shadow: var(--shadow-btn);
+  }
+
+  /* Outline — ghost button, white border on dark */
+  .btn-outline {
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    gap:             0.5rem;
+    font-family:     var(--font-body);
+    font-weight:     500;
+    font-size:       var(--font-size-sm);
+    letter-spacing:  var(--tracking-wide);
+    text-transform:  uppercase;
+    background:      transparent;
+    color:           var(--text-primary);
+    border:          1px solid var(--border-dark);
+    border-radius:   var(--radius-btn);
+    padding:         0.8rem 1.75rem;
+    transition:
+      background    var(--transition-fast),
+      border-color  var(--transition-fast),
+      color         var(--transition-fast),
+      transform     var(--transition-fast);
+    cursor:          pointer;
+    text-decoration: none;
+    white-space:     nowrap;
+  }
+
+  .btn-outline:hover {
+    background:   rgba(255, 255, 255, 0.06);
+    border-color: var(--color-white);
+    transform:    translateY(-1px);
+  }
+
+  .btn-outline:active {
+    background: rgba(255, 255, 255, 0.10);
+    transform:  scale(0.98);
+  }
+
+  /* Light — dark button on white/light surface */
+  .btn-light {
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    gap:             0.5rem;
+    font-family:     var(--font-body);
+    font-weight:     500;
+    font-size:       var(--font-size-sm);
+    letter-spacing:  var(--tracking-wide);
+    text-transform:  uppercase;
+    background:      var(--bg-pure-black);
+    color:           var(--color-white);
+    border:          none;
+    border-radius:   var(--radius-btn);
+    padding:         0.8rem 1.75rem;
+    transition:
+      background  var(--transition-fast),
+      transform   var(--transition-fast);
+    cursor:          pointer;
+    text-decoration: none;
+    white-space:     nowrap;
+  }
+
+  .btn-light:hover {
+    background: var(--color-neutral-800);
+    transform:  translateY(-1px);
+  }
+
+  .btn-light:active {
+    background: var(--color-neutral-700);
+    transform:  scale(0.98);
+  }
+
+  /* Outline-light — ghost button on light surface */
+  .btn-outline-light {
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    gap:             0.5rem;
+    font-family:     var(--font-body);
+    font-weight:     500;
+    font-size:       var(--font-size-sm);
+    letter-spacing:  var(--tracking-wide);
+    text-transform:  uppercase;
+    background:      transparent;
+    color:           var(--text-inverse);
+    border:          1px solid var(--text-inverse);
+    border-radius:   var(--radius-btn);
+    padding:         0.8rem 1.75rem;
+    transition:
+      background  var(--transition-fast),
+      transform   var(--transition-fast);
+    cursor:          pointer;
+    text-decoration: none;
+    white-space:     nowrap;
+  }
+
+  .btn-outline-light:hover {
+    background: rgba(0, 0, 0, 0.06);
+    transform:  translateY(-1px);
+  }
+
+  .btn-outline-light:active {
+    background: rgba(0, 0, 0, 0.12);
+    transform:  scale(0.98);
+  }
+}
+
+/* Focus ring — gold accent, on brand, accessible */
+.btn-primary:focus-visible,
+.btn-outline:focus-visible,
+.btn-light:focus-visible,
+.btn-outline-light:focus-visible {
+  outline:        2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ====================================================================
+   LAYOUT UTILITIES
+   ==================================================================== */
+
+.section-wrapper {
+  max-width:      var(--container-max);
+  margin-inline:  auto;
+  padding-inline: var(--container-gutter-mobile);
+}
+
+@media (min-width: 1024px) {
+  .section-wrapper {
+    padding-inline: var(--container-gutter-desktop);
+    max-width:      var(--container-max-width);
+  }
+}
+
+/* ====================================================================
+   TEXTURE & ATMOSPHERE
+   ==================================================================== */
+
+/* Noise grain — adds analogue warmth to flat dark surfaces.
+   Keep opacity low: present but imperceptible consciously.             */
+.noise-overlay {
+  position:       absolute;
+  inset:          0;
+  z-index:        5;
+  opacity:        0.035;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Subtle vignette for hero sections — draws the eye inward */
+.vignette {
+  position:       absolute;
+  inset:          0;
+  pointer-events: none;
+  background:     radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+}
+
+.bg-base {
+  background: var(--bg-primary);
+}
+
+.bg-base-secondary {
+  background: var(--bg-secondary);
+}
+
+.bg-base-third {
+  background: var(--bg-third);
+}
+.bg-base-fourth {
+  background: var(--bg-fourth);
+}
+.bg-base-fifth {
+  background: var(--bg-fifth);
+}
+.bg-design2p {
+  background: var(--bg-design2p);
+}
+.bg-design2b {
+  background: var(--bg-design2b);
+}
+.bg-design3p {
+  background: var(--bg-design3p);
+}
+.bg-design3b {
+  background: var(--bg-design3b);
+}
+
+
+.hover\:bg-base:hover {
+  background: var(--bg-primary);
+}
+
+.hover\:bg-base-secondary:hover {
+  background: var(--bg-secondary);
+}
+
+.hover\:bg-base-third:hover {
+  background: var(--bg-third);
+}
+
+.hover\:bg-base-fourth:hover {
+  background: var(--bg-fourth);
+}
+
+.hover\:bg-base-fifth:hover {
+  background: var(--bg-fifth);
+}

@@ -1,0 +1,23 @@
+export const BUSINESS = {
+  name: "Fortis Services Group",
+  phone: "+61 408 333 818",
+  phoneRaw: "+61408333818",
+  whatsapp: "+61 408 333 818",
+  whatsappRaw: "+61408333818",
+  whatsappLink: "https://wa.me/61408333818",
+  email: "service@fortisservicesgroup.com.au",
+  url: "https://fortisservicesgroup.com.au",
+  address: "",
+  directionsUrl: "",
+  openingHours: {
+    weekdays: "Mon – Fri: 9:00 AM – 5:00 PM",
+    emergency: "24/7 Emergency Support Available",
+  },
+  googlePlaceId: "",
+  googleBusinessProfile: "",
+  googleReviewLink: "",
+  googleReviewsAll: "",
+  googleScriptUrl: "",
+  serviceArea: "Sydney, Wollongong & Central Coast",
+  mobileBreakpoint: 1023,
+};
