@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Zap, Wrench } from 'lucide-react';
+import { ShieldCheck, Zap, Wrench, CheckCircle2 } from 'lucide-react';
 import { Card3DHover } from '@/components/ui/SimpleAnimations';
 import { services } from '@/lib/servicesData';
 import type { LucideIcon } from 'lucide-react';
@@ -42,18 +42,43 @@ export default function ServiceCards({ cardClassName = 'bg-base' }: { cardClassN
                             }}
                             className={`${cardClassName} h-full flex flex-col p-8 border-[length:var(--border-width)] border-[color:var(--border)] transition-all duration-[var(--transition-base)]`}
                         >
-                            <div className="icon-wrapper text-[var(--text-primary)] mb-7 transition-transform duration-[var(--transition-base)] origin-left">
+                            {/* Service icon — teal */}
+                            <div className="icon-wrapper text-[var(--color-accent)] mb-7 transition-transform duration-[var(--transition-base)] origin-left">
                                 {Icon && <Icon aria-hidden="true" className="w-8 h-8 stroke-1" />}
                             </div>
+
+                            {/* Service name */}
                             <h3 className="font-[family-name:var(--font-display)] text-[1.5rem] mb-3 text-left leading-snug">
                                 {service.name}
                             </h3>
+
+                            {/* Short description */}
                             <p className="text-[var(--text-secondary)] font-light text-sm leading-[var(--leading-relaxed)] mb-7 text-left">
                                 {service.shortDesc}
                             </p>
+
+                            {/* Service Features */}
+                            <p className="text-[0.6875rem] font-medium tracking-[0.12em] uppercase text-[var(--text-primary)] mb-4">
+                                Service Features
+                            </p>
+                            <ul className="space-y-2.5 mb-7">
+                                {service.bullets.map((bullet, idx) => (
+                                    <li key={idx} className="flex items-center gap-2.5">
+                                        <CheckCircle2
+                                            className="w-4 h-4 text-[var(--color-accent)] shrink-0"
+                                            aria-hidden="true"
+                                        />
+                                        <span className="text-[var(--text-secondary)] text-xs leading-snug">
+                                            {bullet.text}
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            {/* Learn more — mt-auto keeps it pinned to bottom */}
                             <Link
                                 href={`/services#${service.id}`}
-                                className="mt-auto inline-flex items-center self-start text-[0.6875rem] font-medium tracking-[0.12em] uppercase text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-[var(--transition-fast)] border-b md:border-b-2 border-current pb-0.5"
+                                className="mt-auto inline-flex items-center self-start text-[0.6875rem] font-medium tracking-[0.12em] uppercase text-[var(--text-primary)] hover:text-[var(--text-accent)] transition-colors duration-[var(--transition-fast)] border-b md:border-b-2 border-current pb-0.5"
                             >
                                 Learn more
                             </Link>

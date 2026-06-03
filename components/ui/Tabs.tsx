@@ -155,7 +155,7 @@ export function TabsTrigger({
         focus-visible:outline-2 focus-visible:outline-[var(--color-black)] focus-visible:outline-offset-2
         ${isActive
           ? 'bg-[var(--bg-dark)] text-[var(--text-inverse)]'
-          : 'bg-base-secondary text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]'
+          : 'bg-base text-[var(--text-secondary)] border border-[var(--border)] hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]'
         }
         ${className}
       `}

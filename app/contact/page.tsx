@@ -153,9 +153,7 @@ export default function ContactPage() {
                   Opening Hours
                 </p>
               </div>
-              <p className="text-[var(--text-secondary)] font-light text-sm leading-[var(--leading-relaxed)] mb-4">
-                Our office hours, with around-the-clock emergency coverage.
-              </p>
+
               <div className="p-4 bg-base-secondary border border-[var(--border)] flex flex-col gap-3">
                 <p className="text-sm text-[var(--text-primary)] font-medium tracking-wide">{BUSINESS.openingHours.weekdays}</p>
                 <p className="text-sm text-[var(--text-primary)] font-medium tracking-wide">{BUSINESS.openingHours.emergency}</p>

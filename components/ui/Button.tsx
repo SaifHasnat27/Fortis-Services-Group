@@ -21,7 +21,7 @@ export default function Button({
     // Primary — dark, confident, thick border. Teal whispers in only on
     // hover via the border — restrained brand touch, no loud wash.
     primary:
-      "bg-[var(--btn-primary-bg,var(--color-neutral-950))] text-[var(--btn-primary-text,var(--color-neutral-50))] border-2 border-[var(--btn-primary-border,var(--color-neutral-300))] hover:bg-[var(--btn-primary-hover-bg,var(--color-neutral-800))] hover:border-[var(--btn-primary-hover-border,var(--color-accent))]",
+      "bg-[var(--btn-primary-bg,var(--color-neutral-950))] text-[var(--btn-primary-text,var(--color-neutral-50))] border-2 border-[var(--btn-primary-border,var(--color-white))] hover:bg-[var(--btn-primary-hover-bg,var(--color-neutral-800))] hover:border-[var(--btn-primary-hover-border,var(--color-accent))]",
 
     // Secondary — quieter sibling on dark. Subtler border, warms on hover.
     secondary:

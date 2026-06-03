@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { getImageProps } from "next/image";
 import { BUSINESS } from "@/lib/constants";
 
@@ -19,75 +19,62 @@ const SLIDES = [
   },
 ];
 
-const HOLD_DURATION = 4000;
-const TRANSITION_MS = 900;
+const HOLD_DURATION = 3000;
+const TRANSITION_MS = 800;
 
 export default function HeroSlider() {
-  const [current, setCurrent] = useState(0);
-  const [next, setNext] = useState<number | null>(null);
-  const [phase, setPhase] = useState<"idle" | "transitioning">("idle");
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const advance = () => {
-    setCurrent(prev => {
-      const nextIdx = (prev + 1) % SLIDES.length;
-      setNext(nextIdx);
-      setPhase("transitioning");
-      return prev;
-    });
-  };
+  // index runs 0..SLIDES.length (the last value lands on a clone of slide 0)
+  const [index, setIndex] = useState(0);
+  const [animate, setAnimate] = useState(true);
 
   useEffect(() => {
-    timerRef.current = setTimeout(advance, HOLD_DURATION);
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [current]);
+    const timer = setTimeout(() => setIndex(prev => prev + 1), HOLD_DURATION);
+    return () => clearTimeout(timer);
+  }, [index]);
 
+  // When we reach the cloned slide, snap back to the real first slide
+  // (no animation) so the loop is seamless.
   useEffect(() => {
-    if (phase !== "transitioning" || next === null) return;
+    if (index !== SLIDES.length) return;
     const t = setTimeout(() => {
-      setCurrent(next);
-      setNext(null);
-      setPhase("idle");
+      setAnimate(false);
+      setIndex(0);
     }, TRANSITION_MS);
     return () => clearTimeout(t);
-  }, [phase, next]);
+  }, [index]);
+
+  // Re-enable animation after the instant snap-back.
+  useEffect(() => {
+    if (animate) return;
+    const raf = requestAnimationFrame(() => setAnimate(true));
+    return () => cancelAnimationFrame(raf);
+  }, [animate]);
 
   const easing = `cubic-bezier(0.76, 0, 0.24, 1)`;
 
+  // Track holds every slide stacked vertically, plus a clone of the first.
+  const track = [...SLIDES, SLIDES[0]];
+
   return (
     <div className="absolute inset-0 z-0 bg-base-secondary overflow-hidden">
-
-      {/* Incoming slide — sits underneath, fully visible */}
-      {next !== null && (
-        <SlideLayer slide={SLIDES[next]} priority={false} />
-      )}
-
-      {/* Current slide — split into left and right doors that slide apart */}
-
-      {/* Left door — clipped to left half, slides out left */}
       <div
         className="absolute inset-0"
         style={{
-          clipPath: "inset(0 50% 0 0)",
-          transform: phase === "transitioning" ? "translateX(-100%)" : "translateX(0%)",
-          transition: phase === "transitioning" ? `transform ${TRANSITION_MS}ms ${easing}` : "none",
+          height: `${track.length * 100}%`,
+          transform: `translateY(-${index * (100 / track.length)}%)`,
+          transition: animate ? `transform ${TRANSITION_MS}ms ${easing}` : "none",
           willChange: "transform",
         }}
       >
-        <SlideLayer slide={SLIDES[current]} priority />
-      </div>
-
-      {/* Right door — clipped to right half, slides out right */}
-      <div
-        className="absolute inset-0"
-        style={{
-          clipPath: "inset(0 0 0 50%)",
-          transform: phase === "transitioning" ? "translateX(100%)" : "translateX(0%)",
-          transition: phase === "transitioning" ? `transform ${TRANSITION_MS}ms ${easing}` : "none",
-          willChange: "transform",
-        }}
-      >
-        <SlideLayer slide={SLIDES[current]} priority />
+        {track.map((slide, i) => (
+          <div
+            key={i}
+            className="relative w-full"
+            style={{ height: `${100 / track.length}%` }}
+          >
+            <SlideLayer slide={slide} priority={i === 0} />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -102,7 +89,7 @@ function SlideLayer({
   priority: boolean;
 }) {
   const commonProps = {
-    alt: "Just Frameless hero",
+    alt: "Fortis Services Group hero",
     fill: true as const,
     sizes: "100vw",
     priority,

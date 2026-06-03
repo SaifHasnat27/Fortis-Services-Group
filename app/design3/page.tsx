@@ -165,21 +165,6 @@ export default function Design3Page() {
                 {/* 5. Google Reviews */}
                 <TestimonialsCarousel className="bg-design3b" cardClassName="bg-design3p" />
 
-                {/* 6. Book an Appointment (Contact Form) */}
-                <SectionWrapper id="contact-form" className="bg-design3b">
-                    <div className="scroll-reveal">
-                        <div className="card !p-10 md:!p-12 hover:border-[var(--border-dark)] transition-colors duration-[var(--transition-fast)]">
-                            <p className="text-[0.6875rem] font-medium tracking-[0.18em] uppercase text-[var(--text-muted)] mb-4">
-                                We're Here to Help
-                            </p>
-                            <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1] tracking-[-0.02em] mb-8 text-[var(--text-primary)]">
-                                Book Your Appointment
-                            </h2>
-                            {isMobile ? <ContactForm /> : <PageContactForm />}
-                        </div>
-                    </div>
-                </SectionWrapper>
-
 
                 {/* 8. FAQ */}
                 <SectionWrapper id="faq" className="bg-design3b">

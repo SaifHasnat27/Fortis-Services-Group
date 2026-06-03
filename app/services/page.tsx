@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { CheckCircle2 } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/Tabs';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import Button from '@/components/ui/Button';
@@ -38,7 +39,7 @@ export default function ServicesPage() {
       <PageBanner {...PAGE_BANNERS.services} />
 
       <SectionWrapper>
-        <Tabs defaultValue={defaultTab} className="max-w-4xl">
+        <Tabs defaultValue={defaultTab} className="">
           <TabsList className="flex justify-start">
             {services.map(s => (
               <TabsTrigger key={s.id} value={s.id}>{s.name}</TabsTrigger>
@@ -47,7 +48,7 @@ export default function ServicesPage() {
 
           {services.map(s => (
             <TabsContent key={s.id} value={s.id}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-12 items-start">
                 <div className="relative aspect-[4/5] rounded-[var(--radius-card)] overflow-hidden">
                   <Image src={s.image} alt={s.name} fill className="object-cover" />
                 </div>
@@ -64,11 +65,24 @@ export default function ServicesPage() {
                         {paragraph}
                       </p>
                     ))}
-                    <ul className="space-y-3 mb-8">
+                    <h3 className="font-[family-name:var(--font-display)] text-lg text-[var(--text-primary)] mb-5">
+                      Service Features
+                    </h3>
+                    <ul className="space-y-6 mb-8">
                       {s.bullets.map((bullet, idx) => (
-                        <li key={idx} className="flex items-center gap-3">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
-                          <span className="text-[var(--text-primary)] text-sm leading-[var(--leading-relaxed)]">{bullet}</span>
+                        <li key={idx} className="flex items-start gap-3">
+                          <CheckCircle2
+                            className="w-5 h-5 mt-0.5 text-[var(--color-accent)] shrink-0"
+                            aria-hidden="true"
+                          />
+                          <div>
+                            <p className="text-[var(--text-primary)] text-sm font-medium leading-[var(--leading-snug)] mb-1.5">
+                              {bullet.text}
+                            </p>
+                            <p className="text-[var(--text-secondary)] font-light text-sm leading-[var(--leading-relaxed)]">
+                              {bullet.desc}
+                            </p>
+                          </div>
                         </li>
                       ))}
                     </ul>

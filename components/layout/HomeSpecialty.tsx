@@ -83,12 +83,12 @@ export default function HomeSpecialty() {
         <Card3DHoverFit>
           <div
             ref={specialtyCardRef}
-            className="max-w-xl p-10 md:p-14 rounded-[var(--radius-card)] text-left bg-base backdrop-blur-sm border border-[var(--border)]"
+            className="max-w-xl p-9 md:p-14 rounded-[var(--radius-card)] text-left bg-base backdrop-blur-sm border border-[var(--border)]"
           >
-            <h2 className="font-[family-name:var(--font-display)] text-4xl mb-4 text-[var(--text-primary)]">
+            <h2 className="font-[family-name:var(--font-display)] text-4xl mb-4 text-text-primary">
               Simplify Asset Compliance & Maintenance
             </h2>
-            <p className="text-[var(--text-secondary)] font-light leading-relaxed mb-8">
+            <p className="text-text-secondary font-light leading-relaxed mb-8">
               We keep your business compliant and operational. From mandatory inspections and certifications to proactive maintenance that prevents costly downtime, our team has you covered.
             </p>
             <Link href="/services">
