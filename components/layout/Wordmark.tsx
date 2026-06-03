@@ -15,7 +15,7 @@ export default function Wordmark({
     <Link href="/" className={`flex items-baseline gap-1.5 ${className}`}>
       <span className={`${baseClasses} wordmark-eye`}>Fortis</span>
       <span className={`${baseClasses} wordmark-spot`}>Services</span>
-      <span className={`${baseClasses} wordmark-spot`}>Group</span>
+      <span className={`${baseClasses} wordmark-eye`}>Group</span>
     </Link>
   );
 }

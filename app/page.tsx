@@ -119,7 +119,6 @@ export default function Home() {
       <SectionWrapper className="bg-base-secondary" id="quick-contact">
         <div className="scroll-reveal">
           <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.25rem,4vw,3rem)] leading-[1.1] tracking-[-0.02em] mb-3 text-left">Get in Touch</h2>
-          <p className="text-[var(--text-secondary)] font-light text-sm leading-relaxed mb-0 text-left max-w-sm">Reach out to us to secure your appointment.</p>
           <QuickContact />
         </div>
       </SectionWrapper>

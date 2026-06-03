@@ -51,10 +51,10 @@ export default function HeroBanner() {
           <div className="absolute inset-0 z-20 flex items-center">
             <div className="section-wrapper w-full px-5 md:px-10">
               <div className="w-full text-left">
-                <h1 className="hero-headline font-[family-name:var(--font-display)] font-bold leading-[1.2] tracking-[-0.01em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white max-w-5xl">
+                <h1 className="hero-headline font-[family-name:var(--font-display)] font-bold leading-[1.1] tracking-[-0.01em] text-[clamp(1.75rem,5.5vw,3.75rem)] text-white max-w-5xl">
                   Asset Maintenance, Compliance & Trade Services for Sydney Businesses
                 </h1>
-                <p className="hero-subtitle text-lg sm:text-xl md:text-2xl text-white max-w-3xl mt-5 leading-relaxed">
+                <p className="hero-subtitle text-base sm:text-lg md:text-xl text-white max-w-3xl mt-5 leading-relaxed">
                   One point of contact for proactive upkeep and rapid repairs.<br />
                   We coordinate your trades and mandatory inspections so you can focus on your business.
                 </p>

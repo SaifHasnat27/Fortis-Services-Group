@@ -9,6 +9,7 @@ export const Card3DHover = ({ children, className = "" }: { children: React.Reac
       {children}
       <style jsx>{`
         .card-3d-hover-block {
+          height: 100%;
           transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2),
                       box-shadow 0.4s ease;
           transform-style: preserve-3d;

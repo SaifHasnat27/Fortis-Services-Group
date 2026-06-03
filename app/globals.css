@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 /* ====================================================================
-   EYE SPOT EYE CARE — Design Token System
-   Theme: Dark Luxury Editorial / Optical Precision
-   Temperature: Cool-dark unified (no warm/cool conflicts)
+   FORTIS SERVICES GROUP — Design Token System
+   Theme: "Quiet Authority" — Premium Dark / Editorial Restraint
+   Philosophy: Luxury through restraint. Refined greyscale ladder does
+   the work; teal is a rare jewel, not a coat of paint. Soft off-white
+   text, near-invisible hairlines, generous space, whisper-soft motion.
    ==================================================================== */
 
 :root {
@@ -12,90 +14,104 @@
      PRIMITIVES — Raw scale, never used directly in components
      ------------------------------------------------------------------ */
 
-  /* Neutrals — Cool-dark scale with barely-perceptible blue undertone.
-     Not visibly blue. Just cold, crisp, and premium.                   */
+  /* Neutrals — A deliberate tonal staircase with the faintest cool
+     undertone. Not flat. Each step is intentional. Off-white at the
+     top (never harsh pure white), true near-black at the bottom.
+     The depth of a premium dark theme lives in THIS ladder.           */
   --color-white:        #FFFFFF;
   --color-black:        #000000;
-  --color-neutral-50:   #F8FAFC;
-  --color-neutral-100:  #F1F5F9;
-  --color-neutral-200:  #E2E8F0;
-  --color-neutral-300:  #CBD5E1;
-  --color-neutral-400:  #94A3B8;
-  --color-neutral-600:  #4A5A7A;
-  --color-neutral-700:  #2E3F5C;
-  --color-neutral-800:  #1A2A42;
-  --color-neutral-850:  #111E33;   /* custom, between 800 and 900 */
-  --color-neutral-900:  #080D1C;
-  --color-neutral-950:  #040810;
+  --color-neutral-50:   #F4F4F5;   /* Soft off-white — primary text       */
+  --color-neutral-100:  #E4E4E7;   /* Bright supporting text              */
+  --color-neutral-200:  #C4C4C9;   /* Light grey                          */
+  --color-neutral-300:  #9A9AA1;   /* Secondary body copy                 */
+  --color-neutral-400:  #6B6B72;   /* Muted labels / captions             */
+  --color-neutral-600:  #3F3F45;   /* Dim UI / disabled                   */
+  --color-neutral-700:  #27272B;   /* Elevated UI / dropdowns             */
+  --color-neutral-800:  #1A1A1D;   /* Hover surfaces                      */
+  --color-neutral-850:  #151517;   /* Selected / active                   */
+  --color-neutral-900:  #101012;   /* Deep panel                          */
+  --color-neutral-950:  #0A0A0B;   /* Pure deep near-black                */
 
-
-  /* Accent – clean, modern blue (no gold) */
-  --color-accent:       #3B82F6;        /* blue‑500 */
-  --color-accent-dim:   #2563EB;        /* blue‑600 */
-  --color-accent-glow:  rgba(59, 130, 246, 0.4);
+  /* Accent — FSG Teal. The rare jewel. Appears on ~5% of surface area.
+     When it shows, the eye snaps to it. Primary CTA + a signal moment
+     or two per page. Never the default for headings or borders.        */
+  --color-accent:       #2DDCD2;        /* FSG teal — the jewel             */
+  --color-accent-dim:   #1FBFB6;        /* teal-600 — hover / pressed        */
+  --color-accent-glow:  rgba(45, 220, 210, 0.16);
 
   /* ------------------------------------------------------------------
      SEMANTIC TOKENS — What components actually consume
      ------------------------------------------------------------------ */
 
   /* · · · Backgrounds · · ·
-     RULE: Each level must be visibly distinct from adjacent levels.
-     Cards (primary) lift off the page (secondary). Always.             */
+     A quiet two-step lift. Canvas is near-black; cards rise just enough
+     to register as a distinct surface. Subtlety is the point — the
+     separation should be felt more than seen.                          */
 
---bg-secondary: #FFFFFF;
---bg-primary: #F8FAFC;
+  --bg-secondary:   #0A0A0B;                          /* Page base — the canvas              */
+  --bg-primary:     #131316;                          /* Cards / panels — a quiet lift       */
 
 
-  --bg-third:           var(--color-neutral-700);  /* #27272C — Dropdowns / elevated UI    */
-  --bg-fourth:          var(--color-neutral-800);  /* #3A3A40 — Hover backgrounds          */
-  --bg-fifth:           var(--color-neutral-850);                  /* Selected / active states             */
-  --bg-pure-black:      var(--color-neutral-950);  /* #07070A — Pure deep black            */
-  --bg-solid-white:     var(--color-white);         /* #FFFFFF — White surfaces             */
-  --bg-dark:            var(--color-neutral-50);   /* #F7F7F8 — Reverse / light cards      */
+  --bg-third:           var(--color-neutral-700);    /* #27272B — Dropdowns / elevated UI   */
+  --bg-fourth:          var(--color-neutral-800);    /* #1A1A1D — Hover backgrounds         */
+  --bg-fifth:           var(--color-neutral-850);    /* #151517 — Selected / active states  */
+  --bg-pure-black:      var(--color-neutral-950);    /* #0A0A0B — Pure deep black           */
+  --bg-solid-white:     var(--color-white);          /* #FFFFFF — White surfaces            */
+  --bg-dark:            var(--color-neutral-50);     /* #F4F4F5 — Reverse / light cards     */
 
-  --bg-design2p: linear-gradient(135deg, #F5F2ED 0%, #EAE6DF 50%, #F0EDE8 100%);
-  --bg-design2b: #E8E4DC;
+  /* design2 — Warm Charcoal variant */
+  --bg-design2p: linear-gradient(135deg, #1C1A17 0%, #141210 50%, #1E1B18 100%);
+  --bg-design2b: #17150F;
 
-  --bg-design3p: linear-gradient(135deg, #2C3240 0%, #1E2330 50%, #252D3D 100%);
-  --bg-design3b: #1A1F2B;
-
+  /* design3 — Slate Dark variant */
+  --bg-design3p: linear-gradient(135deg, #161B22 0%, #0D1117 50%, #161B22 100%);
+  --bg-design3b: #0D1117;
 
 
   /* · · · Text · · ·
-     All values are cool-temperature to match the background scale.     */
+     Three deliberate tiers with real contrast steps between them.
+     Primary is SOFT off-white (#F4F4F5) — never harsh pure white,
+     so headlines feel refined, not glaring. Secondary clearly dims.
+     Muted is a quiet grey for labels. This hierarchy = sophistication. */
 
-  --text-primary:       var(--color-neutral-950);          /* #FFFFFF — Headlines, body            */
-  --text-secondary:     var(--color-neutral-900);   /* #B0B0B8 — Supporting body copy       */
-  --text-muted:         var(--color-neutral-400);   /* #78787F — Labels, captions           */
-  --text-inverse:       var(--color-neutral-900);   /* #0C0C10 — Dark text on light surface */
-  --text-accent:        var(--color-accent);        /* Gold — sparingly, for key labels     */
+  --text-primary:       var(--color-neutral-50);     /* #F4F4F5 — Headlines, key body        */
+  --text-secondary:     var(--color-neutral-300);    /* #9A9AA1 — Supporting body copy       */
+  --text-muted:         var(--color-neutral-400);    /* #6B6B72 — Labels, captions           */
+  --text-inverse:       var(--color-neutral-950);    /* #0A0A0B — Dark text on light surface */
+  --text-accent:        var(--color-accent);         /* FSG teal — rare key labels only      */
 
   /* · · · Borders · · ·
-     Cool-toned. No warm brown. Precise, like an optical instrument.    */
+     Near-invisible neutral hairlines — the quiet luxury detail.
+     Teal is reserved for --border-accent (special moments only).
+     A whisper-thin line reads as crafted; a bright line reads as loud. */
 
-  --border: rgba(15, 20, 25, 0.18); /* Default card border — deep charcoal, medium */
-  --border-light:       rgba(255, 255, 255, 0.06);  /* Hairline divider                     */
-  --border-dark:        rgba(255, 255, 255, 0.28);  /* Hover / focus border — visible       */
-  --border-accent:      var(--color-accent-dim);    /* Gold border — for special elements   */
+  --border-width:       1px;                         /* Global border thickness — change here to update everywhere */
+  --border:             rgba(255, 255, 255, 0.07);   /* Default card border — hairline       */
+  --border-light:       rgba(255, 255, 255, 0.04);   /* Subtle section divider               */
+  --border-dark:        rgba(255, 255, 255, 0.16);   /* Hover / focus border — gently warms  */
+  --border-accent:      var(--color-accent);         /* Teal — rare special elements only    */
 
   /* · · · Shadows · · ·
-     Directional, cool. Never warm-tinted.                              */
+     Soft, deep, diffuse. Premium shadows are felt, not seen — a gentle
+     pool of dark beneath a surface, never a harsh hard edge.           */
 
-  --shadow-card:        0 2px 12px rgba(0, 0, 0, 0.45),
-                        0 1px 3px rgba(0, 0, 0, 0.30);
-  --shadow-card-hover:  0 8px 32px rgba(0, 0, 0, 0.55),
-                        0 2px 8px rgba(0, 0, 0, 0.35),
-                        0 0 0 1px rgba(255, 255, 255, 0.06);
-  --shadow-modal:       0 24px 64px rgba(0, 0, 0, 0.70);
-  --shadow-btn:         0 2px 8px rgba(0, 0, 0, 0.40);
-  --shadow-btn-hover:   0 4px 16px rgba(0, 0, 0, 0.50);
+  --shadow-card:        0 1px 2px  rgba(0, 0, 0, 0.40),
+                        0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-card-hover:  0 2px 4px  rgba(0, 0, 0, 0.40),
+                        0 16px 48px rgba(0, 0, 0, 0.55),
+                        0 0 0 1px  rgba(255, 255, 255, 0.04);
+  --shadow-modal:       0 24px 80px rgba(0, 0, 0, 0.75);
+  --shadow-btn:         0 1px 3px  rgba(0, 0, 0, 0.35);
+  --shadow-btn-hover:   0 4px 16px rgba(0, 0, 0, 0.45);
 
   /* · · · Typography · · ·
-     Cormorant Garamond = editorial luxury, optician heritage.
-     DM Sans = clean, modern, optical precision.                        */
+     Syne = geometric display character, used BIG and sparing.
+     Inter = clean, neutral body. The contrast between a large confident
+     headline and small wide-tracked uppercase labels is what reads as
+     editorial sophistication.                                          */
 
-  --font-display:       'Cormorant Garamond', Georgia, serif;
-  --font-body:          'DM Sans', system-ui, sans-serif;
+  --font-display:       'Syne', system-ui, sans-serif;
+  --font-body:          'Inter', system-ui, sans-serif;
 
   --font-size-hero:     clamp(3rem, 8vw, 6rem);
   --font-size-display:  clamp(2.25rem, 4vw, 3rem);
@@ -104,42 +120,47 @@
   --font-size-sm:       0.875rem;
   --font-size-xs:       0.6875rem;
 
+  /* Line-heights — generous. Air between lines reads as premium.       */
   --leading-tight:      1.1;
-  --leading-snug:       1.2;
-  --leading-normal:     1.5;
-  --leading-relaxed:    1.65;
-  --leading-loose:      1.8;
+  --leading-snug:       1.25;
+  --leading-normal:     1.6;
+  --leading-relaxed:    1.75;
+  --leading-loose:      1.9;
 
+  /* Tracking — tight on the big stuff, wide on small uppercase labels.
+     This split is the editorial signature.                            */
   --tracking-tight:     -0.02em;
   --tracking-normal:    0em;
   --tracking-wide:      0.08em;
-  --tracking-wider:     0.12em;
-  --tracking-widest:    0.18em;
+  --tracking-wider:     0.14em;
+  --tracking-widest:    0.20em;
 
-  /* · · · Layout & Spacing · · · */
+  /* · · · Layout & Spacing · · ·
+     Generous, almost wasteful. Space is the cheapest luxury signal.    */
 
   --nav-height:              72px;
-  --section-padding-y:       5rem;
+  --section-padding-y:       7rem;
   --container-max:           100%;
   --container-max-width:     1920px;
-  --container-gutter-mobile: 5vw;
-  --container-gutter-tablet: 6vw;
-  --container-gutter-desktop:8vw;
+  --container-gutter-mobile: 6vw;
+  --container-gutter-tablet: 7vw;
+  --container-gutter-desktop:9vw;
 
   /* · · · Shape · · ·
-     Zero radius = architectural, precise. Consistent with optical/luxury. */
+     Zero radius = architectural precision. Confident edges.            */
 
   --radius-card:        0px;
   --radius-btn:         0px;
   --radius-input:       0px;
 
   /* · · · Transitions · · ·
-     Easing: ease-out for entrances, ease-in-out for hover states.      */
+     Calm and eased. Premium motion moves slowly and confidently.
+     Nothing snaps; everything settles.                                 */
 
-  --transition-fast:    150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base:    250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow:    400ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-reveal:  600ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast:    180ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base:    320ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow:    480ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-reveal:  680ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ====================================================================
@@ -177,7 +198,7 @@
   --color-bg-fifth:       var(--bg-fifth);
   --color-bg-pure-black:  var(--bg-pure-black);
   --color-bg-dark:        var(--bg-dark);
-  
+
   --color-bg-design2p:    var(--bg-design2p);
   --color-bg-design2b:    var(--bg-design2b);
   --color-bg-design3p:    var(--bg-design3p);
@@ -228,13 +249,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Cormorant renders better with slightly heavier smoothing */
+/* Syne renders crisply — subpixel smoothing for display use */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Selection — gold tint, on brand */
+/* Selection — teal brand tint, restrained */
 ::selection {
   background: var(--color-accent-glow);
   color: var(--text-primary);
@@ -243,8 +264,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Scrollbar — minimal, on theme */
 ::-webkit-scrollbar        { width: 6px; }
 ::-webkit-scrollbar-track  { background: var(--bg-secondary); }
-::-webkit-scrollbar-thumb  { background: var(--color-neutral-600); border-radius: 0; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-neutral-400); }
+::-webkit-scrollbar-thumb  { background: var(--color-neutral-700); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-neutral-600); }
 
 /* ====================================================================
    COMPONENT LAYER
@@ -256,8 +277,8 @@ h1, h2, h3, h4, h5, h6 {
 
   .card {
     background: var(--bg-primary);
-    border: 1px solid var(--border);
-    padding: 2rem;
+    border: var(--border-width) solid var(--border);
+    padding: 2.5rem;
     box-shadow: var(--shadow-card);
     transition:
       transform    var(--transition-base),
@@ -265,46 +286,50 @@ h1, h2, h3, h4, h5, h6 {
       border-color var(--transition-base);
   }
 
+  /* Hover — a calm lift and a gently warming hairline. No colour flash.
+     Restraint reads as premium; the movement whispers.                */
   .card:hover {
-    transform:    translateY(-2px);
+    transform:    translateY(-3px);
     box-shadow:   var(--shadow-card-hover);
+    border-color: var(--border-dark);
   }
 
   /* Light reverse card — for contrast sections */
   .card-reverse {
     background: var(--bg-dark);
     color:      var(--text-inverse);
-    border:     1px solid rgba(0, 0, 0, 0.08);
-    padding:    2rem;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+    border:     var(--border-width) solid rgba(0, 0, 0, 0.08);
+    padding:    2.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
     transition:
       transform  var(--transition-base),
       box-shadow var(--transition-base);
   }
 
   .card-reverse:hover {
-    transform:  translateY(-2px);
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+    transform:  translateY(-3px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
   }
 
   /* ---- Buttons ---- */
 
-  /* Primary — white on dark. The dominant CTA. */
+  /* Primary — teal on dark. THE jewel. The one bold moment per view.
+     This is where the brand colour earns its keep.                    */
   .btn-primary {
     display:         inline-flex;
     align-items:     center;
     justify-content: center;
     gap:             0.5rem;
     font-family:     var(--font-body);
-    font-weight:     500;
+    font-weight:     600;
     font-size:       var(--font-size-sm);
-    letter-spacing:  var(--tracking-wide);
+    letter-spacing:  var(--tracking-wider);
     text-transform:  uppercase;
-    background:      var(--bg-solid-white);
-    color:           var(--text-inverse);
+    background:      var(--color-accent);
+    color:           var(--color-black);
     border:          none;
     border-radius:   var(--radius-btn);
-    padding:         0.8rem 1.75rem;
+    padding:         0.9rem 2rem;
     box-shadow:      var(--shadow-btn);
     transition:
       background  var(--transition-fast),
@@ -316,33 +341,34 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .btn-primary:hover {
-    background:  var(--color-neutral-100);
+    background:  var(--color-accent-dim);
     box-shadow:  var(--shadow-btn-hover);
     transform:   translateY(-1px);
   }
 
   .btn-primary:active {
-    background: var(--color-neutral-200);
-    transform:  scale(0.98);
+    background: var(--color-accent-dim);
+    transform:  scale(0.99);
     box-shadow: var(--shadow-btn);
   }
 
-  /* Outline — ghost button, white border on dark */
+  /* Outline — quiet ghost. Neutral hairline at rest, warms on hover.
+     Calm and restrained — not a teal-shouting secondary.              */
   .btn-outline {
     display:         inline-flex;
     align-items:     center;
     justify-content: center;
     gap:             0.5rem;
     font-family:     var(--font-body);
-    font-weight:     500;
+    font-weight:     600;
     font-size:       var(--font-size-sm);
-    letter-spacing:  var(--tracking-wide);
+    letter-spacing:  var(--tracking-wider);
     text-transform:  uppercase;
     background:      transparent;
     color:           var(--text-primary);
-    border:          1px solid var(--border-dark);
+    border:          var(--border-width) solid var(--border-dark);
     border-radius:   var(--radius-btn);
-    padding:         0.8rem 1.75rem;
+    padding:         0.9rem 2rem;
     transition:
       background    var(--transition-fast),
       border-color  var(--transition-fast),
@@ -354,14 +380,15 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .btn-outline:hover {
-    background:   rgba(255, 255, 255, 0.06);
+    background:   rgba(255, 255, 255, 0.04);
     border-color: var(--color-white);
+    color:        var(--color-white);
     transform:    translateY(-1px);
   }
 
   .btn-outline:active {
-    background: rgba(255, 255, 255, 0.10);
-    transform:  scale(0.98);
+    background: rgba(255, 255, 255, 0.07);
+    transform:  scale(0.99);
   }
 
   /* Light — dark button on white/light surface */
@@ -371,15 +398,15 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     gap:             0.5rem;
     font-family:     var(--font-body);
-    font-weight:     500;
+    font-weight:     600;
     font-size:       var(--font-size-sm);
-    letter-spacing:  var(--tracking-wide);
+    letter-spacing:  var(--tracking-wider);
     text-transform:  uppercase;
     background:      var(--bg-pure-black);
     color:           var(--color-white);
     border:          none;
     border-radius:   var(--radius-btn);
-    padding:         0.8rem 1.75rem;
+    padding:         0.9rem 2rem;
     transition:
       background  var(--transition-fast),
       transform   var(--transition-fast);
@@ -395,7 +422,7 @@ h1, h2, h3, h4, h5, h6 {
 
   .btn-light:active {
     background: var(--color-neutral-700);
-    transform:  scale(0.98);
+    transform:  scale(0.99);
   }
 
   /* Outline-light — ghost button on light surface */
@@ -405,15 +432,15 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     gap:             0.5rem;
     font-family:     var(--font-body);
-    font-weight:     500;
+    font-weight:     600;
     font-size:       var(--font-size-sm);
-    letter-spacing:  var(--tracking-wide);
+    letter-spacing:  var(--tracking-wider);
     text-transform:  uppercase;
     background:      transparent;
     color:           var(--text-inverse);
-    border:          1px solid var(--text-inverse);
+    border:          var(--border-width) solid var(--text-inverse);
     border-radius:   var(--radius-btn);
-    padding:         0.8rem 1.75rem;
+    padding:         0.9rem 2rem;
     transition:
       background  var(--transition-fast),
       transform   var(--transition-fast);
@@ -423,17 +450,17 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .btn-outline-light:hover {
-    background: rgba(0, 0, 0, 0.06);
+    background: rgba(0, 0, 0, 0.05);
     transform:  translateY(-1px);
   }
 
   .btn-outline-light:active {
-    background: rgba(0, 0, 0, 0.12);
-    transform:  scale(0.98);
+    background: rgba(0, 0, 0, 0.10);
+    transform:  scale(0.99);
   }
 }
 
-/* Focus ring — gold accent, on brand, accessible */
+/* Focus ring — teal accent, on brand, accessible */
 .btn-primary:focus-visible,
 .btn-outline:focus-visible,
 .btn-light:focus-visible,
@@ -463,27 +490,33 @@ h1, h2, h3, h4, h5, h6 {
    TEXTURE & ATMOSPHERE
    ==================================================================== */
 
-/* Noise grain — adds analogue warmth to flat dark surfaces.
-   Keep opacity low: present but imperceptible consciously.             */
+/* Noise grain — subtle analogue texture on flat dark surfaces.
+   Keep opacity very low: present but subconscious.                    */
 .noise-overlay {
   position:       absolute;
   inset:          0;
   z-index:        5;
-  opacity:        0.035;
+  opacity:        0.02;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Subtle vignette for hero sections — draws the eye inward */
+/* Vignette — draws eye inward on hero sections */
 .vignette {
   position:       absolute;
   inset:          0;
   pointer-events: none;
   background:     radial-gradient(
     ellipse at center,
-    transparent 40%,
-    rgba(0, 0, 0, 0.45) 100%
+    transparent 45%,
+    rgba(0, 0, 0, 0.50) 100%
   );
+}
+
+/* Teal glow — for the rare accent element that earns a soft pulse */
+.accent-glow {
+  box-shadow: 0 0 20px var(--color-accent-glow),
+              0 0 40px rgba(45, 220, 210, 0.06);
 }
 
 .bg-base {

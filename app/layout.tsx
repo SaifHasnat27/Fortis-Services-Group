@@ -1,22 +1,38 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans, Syne, Inter } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { localBusinessSchema } from "@/lib/schema";
 import { BUSINESS } from "@/lib/constants";
 import "./globals.css";
 
+/* Legacy fonts — kept loaded, available via --font-cormorant / --font-dm-sans */
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
-  variable: "--font-display",
+  variable: "--font-cormorant",
   display: "swap",
 });
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
+
+/* Active FSG fonts — drive --font-display / --font-body tokens */
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-body",
   display: "swap",
 });
@@ -47,7 +63,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${dmSans.variable} ${syne.variable} ${inter.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"
