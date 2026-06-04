@@ -39,6 +39,7 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
+
 export default function TestimonialsCarousel({ className = 'bg-base-secondary', cardClassName = 'bg-base' }: { className?: string; cardClassName?: string }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -127,7 +128,7 @@ export default function TestimonialsCarousel({ className = 'bg-base-secondary', 
           <div className={`${cardClassName} border border-[var(--border)] p-8 md:p-12`}>
             <div
               ref={textRef}
-              className="flex flex-col items-center text-center h-[320px] md:h-[260px]"
+              className="flex flex-col items-center text-center"
               aria-live="polite"
               aria-atomic="true"
             >
@@ -141,17 +142,26 @@ export default function TestimonialsCarousel({ className = 'bg-base-secondary', 
                 </span>
               </div>
 
-              {/* Row 2 — fills remaining height, review centred within */}
-              <div className="flex-1 flex items-center justify-center">
-                <p className="
-                  font-[family-name:var(--font-display)]
-                  text-xl md:text-2xl lg:text-3xl
-                  leading-[var(--leading-snug)]
-                  text-[var(--text-primary)]
-                  italic font-light
-                ">
-                  {t.review}
-                </p>
+              {/* Row 2 — height locked to tallest review via stacked invisible spacers */}
+              <div className="relative w-full">
+                {/* All reviews in one grid cell → container height = tallest review */}
+                <div aria-hidden="true" className="grid">
+                  {testimonials.map((testimonial) => (
+                    <p
+                      key={testimonial.name}
+                      className="col-start-1 row-start-1 invisible w-full font-[family-name:var(--font-display)] text-xl md:text-2xl lg:text-3xl leading-[var(--leading-snug)] italic font-light text-center"
+                    >
+                      {testimonial.review}
+                    </p>
+                  ))}
+                </div>
+
+                {/* Active review centred over spacers */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <p className="w-full font-[family-name:var(--font-display)] text-xl md:text-2xl lg:text-3xl leading-[var(--leading-snug)] text-[var(--text-primary)] italic font-light text-center">
+                    {t.review}
+                  </p>
+                </div>
               </div>
             </div>
 
