@@ -75,7 +75,7 @@ export default function PageBanner({
               className="object-cover object-top"
             />
           </picture>
-          <div className="absolute inset-0 bg-black/30 z-10" />
+          <div className="absolute inset-0 bg-black/15 z-10" />
         </div>
 
         <div className="absolute inset-0 z-20 flex items-center">
