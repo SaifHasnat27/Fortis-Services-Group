@@ -42,7 +42,7 @@ export const services: Service[] = [
         desc: "Gain complete visibility and control over your physical assets. From initial equipment audits and the creation of detailed asset registers to ongoing lifecycle cost analysis, we provide the data-driven insights needed to optimise your capital and operational expenditure planning.",
       },
     ],
-    image: "/images/services/fence.webp",
+    image: "/images/services/asset.webp",
     iconName: "ShieldCheck",
   },
   {
@@ -71,7 +71,7 @@ export const services: Service[] = [
         desc: "For large, complex sites such as high-rise offices, manufacturing facilities or aged care homes, a dedicated presence can be invaluable. We can provide an on-site maintenance person to handle day-to-day planned tasks and immediate corrective repairs, ensuring constant operational oversight.",
       },
     ],
-    image: "/images/services/gate.webp",
+    image: "/images/services/response.webp",
     iconName: "Zap",
   },
   {
@@ -100,7 +100,7 @@ export const services: Service[] = [
         desc: "For those larger jobs that fall outside a simple repair, we manage small-scale projects. This includes carpentry repairs, painting, flooring, and other general building upkeep required to keep your property in top condition.",
       },
     ],
-    image: "/images/services/glass.webp",
+    image: "/images/services/trades.webp",
     iconName: "Wrench",
   },
 ];
