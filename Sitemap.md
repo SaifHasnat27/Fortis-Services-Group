@@ -16,25 +16,25 @@ Fortis Services Group offers a single point of contact for asset maintenance, co
 - `app/contact/page.tsx` (`/contact`) - Contact/Booking page containing the request form, opening hours (Mon-Fri 9AM-5PM, 24/7 Emergency Support), and service locations.
 - `app/services/page.tsx` (`/services`) - In-depth service categories and descriptions mapped using interactive tabs.
 - `app/areas-served/page.tsx` (`/areas-served`) - Placeholder listing targeted service areas (Sydney, Wollongong, Central Coast) as "Coming Soon".
-- `app/pricing/page.tsx` (`/pricing`) - Unused/hidden page from legacy templates.
-- `app/design2/page.tsx` (`/design2`) - Alternate landing page variant with a Warm Black theme.
-- `app/design3/page.tsx` (`/design3`) - Alternate landing page variant with a Warm Stone theme.
+- `app/privacy-policy/page.tsx` (`/privacy-policy`) - [PLANNED] Privacy Policy page outlining data protection compliance.
+- `app/terms-and-conditions/page.tsx` (`/terms-and-conditions`) - [PLANNED] Terms and Conditions page detailing service agreements.
 
 ## 2. Page Connections
-- `/`, `/design2`, `/design3` -> Link to `/services`, `/contact` (Get a Free Quote / Request a Free Quote) and direct call/WhatsApp buttons.
+- `/` -> Links to `/services`, `/contact` (Get a Free Quote / Request a Free Quote) and direct call/WhatsApp buttons.
 - `/about` -> Links to `/contact` (Request a Free Quote CTA).
 - `/services` -> Links to `/contact` (Request a Free Quote CTA).
 - `/contact` -> Main scheduling and form entry point.
+- **Global Footer (All pages)** -> Links to `/privacy-policy` and `/terms-and-conditions`.
 
 ## 3. Key Components Per Page
-- `/`, `/design2`, `/design3`: `components/ui/HeroBanner.tsx`, `components/servicecards/ServiceCards.tsx`, `components/layout/HomeSpecialty.tsx`, `components/ui/TestimonialsCarousel.tsx`, `components/servicecards/faq.tsx` (FAQ Section), `components/forms/ContactForm.tsx`, `components/contact/QuickContact.tsx`
+- `/`: `components/ui/HeroBanner.tsx`, `components/servicecards/ServiceCards.tsx`, `components/layout/HomeSpecialty.tsx`, `components/ui/TestimonialsCarousel.tsx`, `components/servicecards/faq.tsx` (FAQ Section), `components/forms/ContactForm.tsx`, `components/contact/QuickContact.tsx`
 - `/about`: `components/ui/SectionWrapper.tsx`, `components/ui/PageBanner.tsx`, Lucide icons, `components/ui/Button.tsx`
 - `/contact`: `components/forms/ContactForm.tsx`, `components/contact/QuickContact.tsx`, `components/servicecards/faq.tsx`, `components/ui/PageBanner.tsx`
 - `/services`: `components/ui/Tabs.tsx`, `components/ui/PageBanner.tsx`
 
 ## 4. Shared/Global Components
 - `components/layout/Navbar.tsx` - Main site navigation (links to Home, About, Services, Contact, Areas Served).
-- `components/layout/Footer.tsx` - Footnote section containing brand wordmark, location tags, standard opening hours, and 24/7 Emergency Support CTA.
+- `components/layout/Footer.tsx` - Footnote section containing brand wordmark, location tags, standard opening hours, 24/7 Emergency Support CTA, and legal footer links.
 - `components/layout/Wordmark.tsx` - Reusable brand wordmark component.
 - `components/ui/SectionWrapper.tsx` - Container wrapper ensuring consistent padding/margins.
 - `components/ui/Button.tsx` - Global button styles.
@@ -61,6 +61,9 @@ Fortis Services Group offers a single point of contact for asset maintenance, co
 We have successfully completed all core copy, data, metadata, schema, and page translations to migrate the site for **Fortis Services Group**. Unneeded sections (like "Our Work" collections and the Instagram gallery) have been removed from the front-end layout of all pages.
 
 **Next Steps to Finalize:**
-1. Finalize and tweak the color scheme styling tokens inside `globals.css` if necessary.
-2. Update/replace the static placeholder image files in the public directory with real company assets.
-3. Perform a final responsive UI and browser validation pass.
+1. Create the **Privacy Policy** page (`app/privacy-policy/page.tsx`).
+2. Create the **Terms & Conditions** page (`app/terms-and-conditions/page.tsx`).
+3. Add links to both legal pages in `components/layout/Footer.tsx`.
+4. Fix and update remaining image alt texts and clean up template comments/leftover components from previous forks.
+5. Replace static placeholder image files in the public directory with real company assets.
+6. Perform a final responsive UI and browser validation pass.

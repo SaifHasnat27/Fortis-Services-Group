@@ -21,8 +21,8 @@ export const services: Service[] = [
     name: "Asset Compliance & Management",
     shortDesc: "Stay legally compliant and reduce risk with fully coordinated inspections, preventative maintenance, and asset lifecycle management.",
     longDesc: [
-      "We manage and track every mandatory inspection your business is required to meet, including smoke alarm testing, switchboard thermal imaging, emergency lighting checks and fire equipment servicing. Operating across Sydney, Wollongong and the Central Coast, we ensure you remain compliant with all NSW statutory obligations without the administrative burden.",
-      "Beyond compliance, we build tailored preventative maintenance schedules that extend the life of your critical assets, including refrigeration systems in hospitality venues, HVAC units in high-rise offices, and production equipment in manufacturing and warehousing. We become your strategic partner in risk reduction, cost certainty and asset longevity.",
+      "We manage and track every mandatory inspection your business is required to meet, including smoke alarm testing, switchboard thermal imaging, emergency lighting checks and fire equipment servicing. Operating across Sydney, Wollongong, Central Coast and surrounding areas, we ensure you remain compliant with all NSW statutory obligations without the administrative burden.",
+      "Beyond compliance, we build tailored preventative maintenance schedules that extend the life of your critical assets, including refrigeration systems in hospitality venues, HVAC units in high-rise offices, and production equipment in manufacturing and warehousing. We become your strategic partner in risk reduction, cost certainty and asset longevity. Whatever your requirements, Fortis Services Group has the expertise and resources to deliver.",
     ],
     bullets: [
       {
@@ -31,7 +31,7 @@ export const services: Service[] = [
       },
       {
         text: "Preventative Maintenance Scheduling",
-        desc: "Extend asset life and reduce unexpected costs with a tailored preventative maintenance plan. We schedule and manage essential checks for all your critical equipment, such as refrigeration systems in hospitality, air conditioning units in high-rise offices, and production line machinery in warehousing and manufacturing.",
+        desc: "Whether it's air conditioning, refrigeration, electrical, plumbing, fire compliance, cleaning, pest control, painting, landscaping, roofing, security, or general maintenance, we coordinate and manage the services your property needs to operate safely, efficiently and without disruption.",
       },
       {
         text: "Proactive & Reactive Repairs",
@@ -51,7 +51,7 @@ export const services: Service[] = [
     shortDesc: "One call deploys qualified technicians to your site fast, minimising downtime and centralising all urgent repair requests.",
     longDesc: [
       "Downtime costs money. When a breakdown happens, you need the right technician on site fast, not a list of contractors to call through. Our dedicated helpdesk acts as your central command, logging every request, dispatching the nearest qualified technician, and providing real-time updates until the job is resolved.",
-      "For large or complex sites like high-rise offices, manufacturing facilities and aged care homes, we can also place an on-site maintenance person to handle day-to-day planned tasks and immediate corrective repairs. You get constant operational oversight and a single, accountable point of contact.",
+      "For hospitality venues, manufacturing facilities, warehouses, high rise offices, and aged care homes, you get round the clock reactive support with constant operational oversight and a single accountable point of contact.",
     ],
     bullets: [
       {
@@ -97,7 +97,7 @@ export const services: Service[] = [
       },
       {
         text: "General Building Maintenance",
-        desc: "For those larger jobs that fall outside a simple repair, we manage small-scale projects. This includes carpentry repairs, painting, flooring, and other general building upkeep required to keep your property in top condition.",
+        desc: "For those larger jobs that fall outside a simple repair, we manage small-scale projects. This includes carpentry, painting, flooring, cleaning, pest control, landscaping, and other general building upkeep required to keep your property in top condition. Our services offer complete coverage, tailored specifically to what you need.",
       },
     ],
     image: "/images/services/trades.webp",

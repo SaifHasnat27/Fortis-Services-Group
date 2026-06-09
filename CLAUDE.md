@@ -18,8 +18,6 @@
 
 ## Theme & Styling Tokens
 - **Backgrounds**: Use `bg-base-secondary` (main body background) and `bg-base` (card/lifted elements background).
-- **Design 2 Variant**: Use `bg-design2b` (main background) and `bg-design2p` (card/lifted elements background).
-- **Design 3 Variant**: Use `bg-design3b` (main background) and `bg-design3p` (card/lifted elements background).
 - **Text**: Use `text-primary` (headings/primary text), `text-secondary` (supporting copy), and `text-muted` (labels/captions).
 - **Borders**: Use `border-[var(--border)]` (subtle default border) and `hover:border-[var(--border-dark)]` (active/hover focus state).
 

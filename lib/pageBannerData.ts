@@ -7,8 +7,8 @@ export interface BannerData {
 
 export const PAGE_BANNERS: Record<string, BannerData> = {
   about: {
-    heading: "About Fortis Services Group",
-    subheading: "A single point of contact for asset maintenance, compliance and trade services across Sydney, Wollongong and the Central Coast.",
+    heading: "Fortis Services Group",
+    subheading: "A single point of contact for asset maintenance, compliance and trade services across Sydney, Wollongong, Central Coast & surrounding areas.",
     desktopSrc: "/images/pageBanner/about.webp",
     mobileSrc: "/images/pageBanner/about-mobile.webp",
   },
@@ -20,7 +20,7 @@ export const PAGE_BANNERS: Record<string, BannerData> = {
   },
   contact: {
     heading: "Get a Free Quote",
-    subheading: "Speak to our team about a tailored asset and compliance management plan for your business. We cover Sydney, Wollongong and the Central Coast.",
+    subheading: "Speak to our team about a tailored asset and compliance management plan for your business. We cover Sydney, Wollongong, Central Coast & surrounding areas.",
     desktopSrc: "/images/pageBanner/contact.webp",
     mobileSrc: "/images/pageBanner/contact-mobile.webp",
   },

@@ -96,7 +96,7 @@ export default function AboutPage() {
                 Most businesses spend more time managing maintenance than they realise. Chasing different contractors, re-explaining the same problem, juggling separate invoices for plumbing, electrical and refrigeration — it adds up. Fortis Services Group was built to remove that friction entirely.
               </p>
               <p>
-                We operate as a single point of contact for asset compliance, reactive maintenance and integrated trade services across Sydney, Wollongong and the Central Coast. Whether you manage a hospitality venue, a manufacturing facility, a high-rise office or an aged care home, we take the coordination off your plate and give you confidence that your site is covered.
+                We operate as a single point of contact for asset compliance, reactive maintenance and integrated trade services across Sydney, Wollongong, Central Coast & surrounds. Whether you manage a hospitality venue, a manufacturing facility, a high-rise office or an aged care home, we take the coordination off your plate and give you confidence that your site is covered.
               </p>
               <p>
                 Our team works with vetted, qualified tradespeople and manages every job from request through to resolution. You focus on your business. We handle the rest.

@@ -52,7 +52,7 @@ export default function HeroBanner() {
             <div className="section-wrapper w-full px-5 md:px-10">
               <div className="w-full text-left">
                 <h1 className="hero-headline font-[family-name:var(--font-display)] font-bold leading-[1.1] tracking-[-0.01em] text-[clamp(1.75rem,5.5vw,3rem)] text-white max-w-5xl">
-                  Asset Maintenance, Compliance & Trade Services for Sydney Businesses
+                  Asset Maintenance, Compliance & Trade Services for Sydney & Surrounding Businesses
                 </h1>
                 <p className="hero-subtitle text-base sm:text-lg xl:text-xl text-white max-w-3xl mt-5 leading-relaxed">
                   One point of contact for proactive upkeep and rapid repairs.<br />

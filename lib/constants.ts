@@ -18,6 +18,6 @@ export const BUSINESS = {
   googleReviewLink: "",
   googleReviewsAll: "",
   googleScriptUrl: "",
-  serviceArea: "Sydney, Wollongong & Central Coast",
+  serviceArea: "Sydney, Wollongong, Central Coast and surrounding areas",
   mobileBreakpoint: 1023,
 };
