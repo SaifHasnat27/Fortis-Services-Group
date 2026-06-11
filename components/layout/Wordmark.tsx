@@ -16,9 +16,9 @@ export default function Wordmark({
 
   return (
     <Link href="/" className={`flex items-baseline gap-1.5 ${className}`}>
-      <span className={`${baseClasses} wordmark-eye font-bold text-[var(--color-accent)]`}>Fortis</span>
-      <span className={`${baseClasses} wordmark-spot font-light ${restColor}`}>Services</span>
-      <span className={`${baseClasses} wordmark-eye font-light ${restColor}`}>Group</span>
+      <span className={`${baseClasses} wordmark-a font-bold text-[var(--color-accent)]`}>Fortis</span>
+      <span className={`${baseClasses} wordmark-b font-light ${restColor}`}>Services</span>
+      <span className={`${baseClasses} wordmark-c font-light ${restColor}`}>Group</span>
     </Link>
   );
 }

@@ -84,7 +84,7 @@ export default function PageBanner({
               <h1 className="hero-headline font-[family-name:var(--font-display)] leading-[1.1] mb-8 tracking-[-0.02em] text-[clamp(2rem,8vh,4rem)] md:text-[clamp(2rem,9vh,3.6rem)]">
                 <span className="inline-block">{heading}</span>
               </h1>
-              <p className="hero-subtitle font-light mb-10 max-w-md leading-relaxed text-[clamp(0.875rem,2.5vh,1.25rem)] md:text-[clamp(1rem,3.5vh,1.5rem)] text-white/90">
+              <p className="hero-subtitle font-light mb-10 max-w-3xl leading-relaxed text-[clamp(0.875rem,2.5vh,1.25rem)] md:text-[clamp(1rem,3.5vh,1.5rem)] text-white/90">
                 {subheading}
               </p>
             </div>

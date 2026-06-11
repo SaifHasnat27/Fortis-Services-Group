@@ -1,184 +1,149 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useRef } from 'react';
+import Link from 'next/link';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import { motion } from 'framer-motion';
+import { CheckCircle2 } from 'lucide-react';
+import SectionWrapper from '@/components/ui/SectionWrapper';
+import QuickContact from '@/components/contact/QuickContact';
+import Button from '@/components/ui/Button';
+import { Card3DHover } from '@/components/ui/SimpleAnimations';
+import PageBanner from '@/components/ui/PageBanner';
+import { PAGE_BANNERS } from '@/lib/pageBannerData';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
+
+const REGIONS = [
+  {
+    name: "Sydney",
+    suburbs: ["Eastern Suburbs", "Northern Beaches", "North Shore", "Inner West", "Western Sydney", "South Sydney"],
+  },
+  {
+    name: "Wollongong",
+    suburbs: ["Wollongong CBD", "Port Kembla", "Unanderra", "Fairy Meadow", "Coniston", "Albion Park Rail"],
+  },
+  {
+    name: "Central Coast",
+    suburbs: ["Gosford", "West Gosford", "Somersby", "Tuggerah", "Warnervale", "Erina"],
+  },
+  {
+    name: "Blue Mountains",
+    suburbs: ["Katoomba", "Springwood", "Leura", "Wentworth Falls", "Lawson", "Glenbrook"],
+  },
+  {
+    name: "Southern Highlands",
+    suburbs: ["Moss Vale", "Bowral", "Mittagong", "Braemar", "Bundanoon", "Berrima"],
+  },
+  {
+    name: "Hawkesbury",
+    suburbs: ["Richmond", "Windsor", "South Windsor", "North Richmond", "Mulgrave", "Pitt Town"],
+  },
+];
 
 export default function AreasServedPage() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>(0);
+  const container = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReducedMotion) return;
-
-    let particles: Array<{
-      x: number;
-      y: number;
-      size: number;
-      speedX: number;
-      speedY: number;
-      opacity: number;
-      color: string;
-    }> = [];
-
-    const createParticles = () => {
-      particles = [];
-      for (let i = 0; i < 100; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 2 + 0.5,
-          speedX: (Math.random() - 0.5) * 0.8,
-          speedY: (Math.random() - 0.5) * 0.8,
-          opacity: Math.random() * 0.4 + 0.2,
-          color: `hsl(${185 + Math.random() * 40}, 85%, ${70 + Math.random() * 20}%)`,
+  useGSAP(
+    () => {
+      const revealSections = gsap.utils.toArray('.scroll-reveal');
+      revealSections.forEach((section: any) => {
+        gsap.from(section.children, {
+          y: 40,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: section, start: 'top 85%' },
         });
-      }
-    };
-
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      createParticles();
-    };
-
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    const animate = () => {
-      if (!ctx || !canvas) return;
-
-      ctx.fillStyle = "rgba(5, 5, 10, 0.08)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach((particle) => {
-        particle.x += particle.speedX;
-        particle.y += particle.speedY;
-
-        if (particle.x < 0) particle.x = canvas.width;
-        if (particle.x > canvas.width) particle.x = 0;
-        if (particle.y < 0) particle.y = canvas.height;
-        if (particle.y > canvas.height) particle.y = 0;
-
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = particle.color.replace(
-          ")",
-          `, ${particle.opacity})`
-        ).replace("hsl", "hsla");
-        ctx.fill();
       });
-
-      ctx.strokeStyle = "rgba(0, 200, 255, 0.15)";
-      ctx.lineWidth = 0.8;
-
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          const maxDistance = 120;
-
-          if (distance < maxDistance) {
-            const opacity = 0.15 * (1 - distance / maxDistance);
-            ctx.strokeStyle = `rgba(0, 220, 255, ${opacity})`;
-            ctx.lineWidth = 0.6 + (1 - distance / maxDistance) * 0.6;
-
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    createParticles();
-    animate();
-
-    return () => {
-      window.removeEventListener("resize", resizeCanvas);
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
-    };
-  }, []);
+    },
+    { scope: container }
+  );
 
   return (
-    <>
-      <canvas
-        ref={canvasRef}
-        className="fixed top-0 left-0 w-screen h-screen -z-10"
-        style={{ background: "#050510" }}
-      />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4 }}
+      className="w-full bg-base-secondary min-h-screen pb-20"
+      ref={container}
+    >
+      <PageBanner {...PAGE_BANNERS.areasServed} />
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.4 }}
-        className="relative w-full min-h-[60vh] flex items-center justify-center bg-transparent"
-      >
-        <div
-          className="bg-black/60 backdrop-blur-sm rounded-none p-8 md:p-10 text-center"
-          style={{
-            border: "1px solid rgba(255,255,255,0.1)",
-            boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
-          }}
-        >
-          <h1
-            className="font-[family-name:var(--font-display)] text-[clamp(2rem,5vw,3rem)] leading-[1.1] tracking-[-0.02em] mb-6"
-            style={{
-              color: "#ffffff",
-              fontWeight: "bold",
-              textShadow: "none",
-            }}
-          >
-            Areas Served
-          </h1>
-
-          <div className="inline-block">
-            <span
-              className="font-bold text-[clamp(1.5rem,4.5vw,1.5rem)] leading-[1.2] tracking-wide animate-pulse-glow"
-              style={{
-                display: "inline-block",
-                color: "#80ffff",
-                textShadow: "0 0 8px rgba(0, 200, 255, 0.8), 0 0 15px rgba(0, 100, 255, 0.5)",
-                animation: "pulseGlow 2.5s ease-in-out infinite",
-              }}
-            >
-              Coming Soon
-            </span>
+      {/* Regions Grid */}
+      <SectionWrapper>
+        <div className="scroll-reveal">
+          <div className="mb-14">
+            <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.25rem,4vw,3rem)] leading-[1.1] tracking-[-0.02em] text-[var(--text-primary)] mb-4">
+              Where We Operate
+            </h2>
+            <p className="text-[var(--text-secondary)] font-light text-sm leading-[var(--leading-relaxed)]">
+              From the regions and suburbs below to the areas surrounding them, our helpdesk, technicians and trade partners have you covered.
+            </p>
           </div>
-        </div>
 
-        <style jsx>{`
-          @keyframes pulseGlow {
-            0% {
-              transform: scale(1);
-              opacity: 0.8;
-              text-shadow: 0 0 0px rgba(0, 200, 255, 0);
-            }
-            50% {
-              transform: scale(1.08);
-              opacity: 1;
-              text-shadow: 0 0 15px rgba(0, 220, 255, 0.9), 0 0 25px rgba(0, 100, 255, 0.6);
-            }
-            100% {
-              transform: scale(1);
-              opacity: 0.8;
-              text-shadow: 0 0 0px rgba(0, 200, 255, 0);
-            }
-          }
-        `}</style>
-      </motion.div>
-    </>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {REGIONS.map((region, index) => (
+              <Card3DHover key={region.name}>
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: index * 0.08, duration: 0.5 },
+                    },
+                  }}
+                  className="card text-left h-full"
+                >
+                  <h3 className="font-[family-name:var(--font-display)] text-2xl text-[var(--text-primary)] mb-5">
+                    {region.name}
+                  </h3>
+                  <ul className="space-y-2">
+                    {region.suburbs.map((suburb) => (
+                      <li key={suburb} className="flex items-center gap-3">
+                        <CheckCircle2
+                          className="w-5 h-5 text-[var(--color-accent)] shrink-0"
+                          aria-hidden="true"
+                        />
+                        <span className="text-[var(--text-secondary)] font-light text-sm leading-[var(--leading-relaxed)]">
+                          {suburb}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </Card3DHover>
+            ))}
+          </div>
+
+          <Link href="/contact">
+            <Button variant="primary">Get a Free Quote</Button>
+          </Link>
+        </div>
+      </SectionWrapper>
+
+      {/* Not Listed CTA + Quick Contact */}
+      <SectionWrapper>
+        <div className="scroll-reveal">
+          <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1] tracking-[-0.02em] text-[var(--text-primary)] mb-4">
+            Don&apos;t See Your Suburb?
+          </h2>
+          <p className="text-[var(--text-secondary)] font-light text-sm leading-[var(--leading-relaxed)]">
+            Our service network covers all areas across Sydney, Wollongong, Central Coast and surrounding regions. If your location isn&apos;t listed above, get in touch, chances are we&apos;ve already got you covered.
+          </p>
+          <QuickContact />
+        </div>
+      </SectionWrapper>
+    </motion.div>
   );
 }

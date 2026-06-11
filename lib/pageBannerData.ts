@@ -24,4 +24,10 @@ export const PAGE_BANNERS: Record<string, BannerData> = {
     desktopSrc: "/images/pageBanner/contact.webp",
     mobileSrc: "/images/pageBanner/contact-mobile.webp",
   },
+  areasServed: {
+    heading: "Areas Served",
+    subheading: "Proudly supporting businesses across Sydney, Wollongong, Central Coast and surrounding regions with asset compliance, maintenance and trade services.",
+    desktopSrc: "/images/pageBanner/areas.webp",
+    mobileSrc: "/images/pageBanner/areas-mobile.webp",
+  },
 };

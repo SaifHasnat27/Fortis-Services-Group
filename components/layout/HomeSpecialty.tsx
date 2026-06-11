@@ -71,7 +71,7 @@ export default function HomeSpecialty() {
       <div ref={specialtyBgRef} className="absolute inset-0 z-0 will-change-transform">
         <Image
           src={isMobile ? "/images/specialty-mobile.webp" : "/images/specialty-desktop.webp"}
-          alt="Designer Frames & Prescription Eyewear"
+          alt="Fortis Services Group commercial asset compliance and maintenance management"
           fill
           sizes="100vw"
           priority

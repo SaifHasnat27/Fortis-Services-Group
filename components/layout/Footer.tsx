@@ -36,12 +36,12 @@ export default function Footer({ className = 'bg-base' }: { className?: string }
           {/* Contact Info */}
           <div className="text-center">
             <h4 className="font-[family-name:var(--font-display)] text-xl text-[var(--text-primary)] mb-4">
-              Visit Us
+              Contact Us
             </h4>
             <ul className="flex flex-col gap-3 text-[var(--text-secondary)] font-light items-center">
-              <li className="flex items-center gap-3">
-                <Phone aria-hidden="true" className="w-5 h-5 text-[var(--text-primary)] shrink-0" />
-                <a href={`tel:${BUSINESS.phoneRaw}`} className="hover:text-[var(--text-primary)] transition-colors">
+              <li>
+                <a href={`tel:${BUSINESS.phoneRaw}`} className="group flex items-center gap-3 hover:text-[var(--text-primary)] transition-colors">
+                  <Phone className="w-5 h-5 text-[var(--text-primary)] shrink-0" />
                   {BUSINESS.phone}
                 </a>
               </li>
@@ -53,48 +53,58 @@ export default function Footer({ className = 'bg-base' }: { className?: string }
                 <MessageCircle aria-hidden="true" className="w-5 h-5 text-[var(--text-primary)] shrink-0" />
                 <span>{BUSINESS.openingHours.emergency}</span>
               </li>
+              <li>
+                <a
+                  href={BUSINESS.whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 hover:text-[var(--text-primary)] transition-colors"
+                >
+                  <MessageCircle className="w-5 h-5 text-[var(--text-primary)] shrink-0" />
+                  Message us on WhatsApp
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="pt-6 border-t border-[var(--border)]">
-          {/* Desktop layout */}
-          <div className="hidden md:grid md:grid-cols-3 items-center text-sm text-[var(--text-secondary)] font-light">
-            <p>&copy; {currentYear} {BUSINESS.name}. All rights reserved.</p>
+
+          {/* Desktop — 3-col: Policy (left) | T&C (centre) | Copyright (right) */}
+          <div className="hidden md:grid md:grid-cols-3 items-center text-sm text-[var(--text-secondary)] font-light mb-4">
+            <Link href="/policy" className="hover:text-[var(--text-primary)] transition-colors">
+              Privacy Policy
+            </Link>
             <div className="text-center">
-              <span>Developed by </span>
-              <a
-                href="https://integrateai.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 underline hover:text-blue-400 transition-colors"
-              >
-                Integrate AI
-              </a>
+              <Link href="/terms" className="hover:text-[var(--text-primary)] transition-colors">
+                Terms &amp; Conditions
+              </Link>
             </div>
+            <p className="text-right">&copy; {currentYear} {BUSINESS.name}. All rights reserved.</p>
+          </div>
+
+          {/* Row 2 — Desktop: Integrate AI centered */}
+          <div className="hidden md:flex justify-center text-sm text-[var(--text-secondary)] font-light">
+            <span>Developed by&nbsp;</span>
             <a
-              href={BUSINESS.whatsappLink}
+              href="https://integrateai.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 justify-end hover:text-[var(--text-primary)] transition-colors"
+              className="text-blue-600 underline hover:text-blue-400 transition-colors"
             >
-              <MessageCircle aria-hidden="true" className="w-4 h-4" />
-              <span>Message us on WhatsApp</span>
+              Integrate AI
             </a>
           </div>
 
-          {/* Mobile layout */}
+          {/* Mobile — centered, each on own row */}
           <div className="flex flex-col items-center gap-4 md:hidden text-sm text-[var(--text-secondary)] font-light">
-            <a
-              href={BUSINESS.whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-[var(--text-primary)] transition-colors"
-            >
-              <MessageCircle aria-hidden="true" className="w-4 h-4" />
-              <span>Message us on WhatsApp</span>
-            </a>
+            <Link href="/policy" className="hover:text-[var(--text-primary)] transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-[var(--text-primary)] transition-colors">
+              Terms &amp; Conditions
+            </Link>
             <p>&copy; {currentYear} {BUSINESS.name}. All rights reserved.</p>
             <div>
               <span>Developed by </span>
@@ -108,6 +118,7 @@ export default function Footer({ className = 'bg-base' }: { className?: string }
               </a>
             </div>
           </div>
+
         </div>
       </div>
     </footer>
