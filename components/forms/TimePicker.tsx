@@ -11,7 +11,7 @@ interface TimePickerProps {
 }
 
 const START_HOUR = 0;
-const END_HOUR = 23; // 11 PM – last bookable slot is 23:30 (24/7 service)
+const END_HOUR = 24; // last bookable slot is 23:30 (24/7 service)
 const INTERVAL = 30; // minutes
 
 // Helper: always returns current Sydney time (DST‑aware) – guaranteed valid
@@ -73,9 +73,8 @@ export default function TimePicker({ value, onChange, selectedDate, disabled }: 
     // Generate all time slots (24h format)
     const allSlots = useMemo(() => {
         const slots: string[] = [];
-        for (let h = START_HOUR; h <= END_HOUR; h++) {
+        for (let h = START_HOUR; h < END_HOUR; h++) {
             for (let m = 0; m < 60; m += INTERVAL) {
-                if (h === END_HOUR && m > 0) break;
                 slots.push(`${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`);
             }
         }
