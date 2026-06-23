@@ -10,9 +10,9 @@ interface TimePickerProps {
     disabled?: boolean;
 }
 
-const START_HOUR = 10;
-const END_HOUR = 18; // 6 PM – last bookable slot is 18:00
-const INTERVAL = 15; // minutes
+const START_HOUR = 0;
+const END_HOUR = 23; // 11 PM – last bookable slot is 23:30 (24/7 service)
+const INTERVAL = 30; // minutes
 
 // Helper: always returns current Sydney time (DST‑aware) – guaranteed valid
 function getSydneyNow(): Date {
