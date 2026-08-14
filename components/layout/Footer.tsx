@@ -11,7 +11,7 @@ export default function Footer({ className = 'bg-base' }: { className?: string }
     <footer className={`${className} text-[var(--text-primary)] border-t border-[var(--border)]`}>
       <div className="section-wrapper pt-8 pb-6 md:pt-10 md:pb-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-          {/* Brand Column */}
+          {/* Branding Column */}
           <div className="flex flex-col items-center gap-6 text-center">
             <Wordmark dark={false} />
             <p className="text-[var(--text-secondary)] font-light max-w-sm text-pretty">
