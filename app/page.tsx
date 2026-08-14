@@ -69,7 +69,7 @@ export default function Home() {
         </div>
       </SectionWrapper>
 
-      {/* 7. FAQ */}
+      {/* 7. FAQs */}
       <SectionWrapper id="faq" className="bg-base-secondary">
         <div className="scroll-reveal">
           <FAQ />
