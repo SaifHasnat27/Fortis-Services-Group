@@ -20,4 +20,6 @@ export const BUSINESS = {
   googleScriptUrl: "https://script.google.com/macros/s/AKfycbzYRohPJCS4RHJfxztGWRSSngiX7qm3Oc0-ay371EwTVf7P26b2r9FVxrIItN2TNZPu/exec",
   serviceArea: "Sydney, Wollongong, Central Coast and surrounding areas",
   mobileBreakpoint: 1023,
+  rta: "AU069453",
+  abn: "51 696 557 114",
 };

@@ -17,6 +17,17 @@ export default function Footer({ className = 'bg-base' }: { className?: string }
             <p className="text-[var(--text-secondary)] font-light max-w-sm text-pretty">
               Asset maintenance, compliance &amp; integrated trade services. One point of contact for {BUSINESS.serviceArea}.
             </p>
+            <div className="flex flex-col gap-3 text-[var(--text-secondary)] font-light">
+              <p><span className="text-[var(--text-primary)]">RTA:</span> {BUSINESS.rta}</p>
+              <a
+                href="https://abr.business.gov.au/ABN/View?abn=51696557114"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[var(--text-primary)] transition-colors"
+              >
+                <span className="text-[var(--text-primary)]">ABN:</span> {BUSINESS.abn}
+              </a>
+            </div>
           </div>
 
           {/* Explore Links */}
