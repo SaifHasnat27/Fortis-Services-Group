@@ -1,7 +1,7 @@
 export const BUSINESS = {
   name: "Fortis Services Group",
-  phone: "+61 408 333 818",
-  phoneRaw: "+61408333818",
+  phone: "1300 002 216",
+  phoneRaw: "1300002216",
   whatsapp: "+61 408 333 818",
   whatsappRaw: "+61408333818",
   whatsappLink: "https://wa.me/61408333818",
