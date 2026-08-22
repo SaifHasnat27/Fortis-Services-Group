@@ -1,27 +1,11 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans, Syne, Inter } from "next/font/google";
+import { Syne, Inter } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { localBusinessSchema } from "@/lib/schema";
 import { BUSINESS } from "@/lib/constants";
 import { PAGE_SEO } from "@/lib/seo";
 import "./globals.css";
-
-/* Legacy fonts — kept loaded, available via --font-cormorant / --font-dm-sans */
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-dm-sans",
-  display: "swap",
-});
 
 /* Active FSG fonts — drive --font-display / --font-body tokens */
 const syne = Syne({
@@ -70,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${dmSans.variable} ${syne.variable} ${inter.variable}`}
+      className={`${syne.variable} ${inter.variable}`}
     >
       <head>
         <script

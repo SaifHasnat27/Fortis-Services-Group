@@ -1,30 +1,22 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef } from 'react';
+import dynamic from 'next/dynamic';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import QuickContact from '@/components/contact/QuickContact';
 import TestimonialsCarousel from '@/components/ui/TestimonialsCarousel';
 import HeroBanner from '@/components/ui/HeroBanner';
-import { BUSINESS } from '@/lib/constants';
 import ServiceCards from '@/components/servicecards/ServiceCards';
 import FAQ from '@/components/servicecards/faq';
-import ContactForm from '@/components/forms/ContactForm';
-import PageContactForm from '@/components/forms/PageContactForm';
+const PageContactForm = dynamic(() => import('@/components/forms/PageContactForm'), {
+  ssr: false,
+});
 import HomeSpecialty from '@/components/layout/HomeSpecialty';
 import ICP from '@/components/servicecards/icp';
 import WhyUs from '@/components/servicecards/whyUs';
 
 export default function Home() {
   const container = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${BUSINESS.mobileBreakpoint}px)`);
-    setIsMobile(mql.matches);
-    const handleChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mql.addEventListener('change', handleChange);
-    return () => mql.removeEventListener('change', handleChange);
-  }, []);
 
   return (
     <div ref={container} className="w-full">
@@ -64,7 +56,7 @@ export default function Home() {
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1] tracking-[-0.02em] mb-8 text-[var(--text-primary)]">
               Get a Free Quote
             </h2>
-            {isMobile ? <ContactForm /> : <PageContactForm />}
+            <PageContactForm />
           </div>
         </div>
       </SectionWrapper>

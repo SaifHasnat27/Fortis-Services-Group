@@ -109,8 +109,8 @@ export default function PageContactForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
 
-      {/* ── Two-column grid ── */}
-      <div className="grid grid-cols-2 gap-x-10 gap-y-7">
+      {/* ── Two-column grid (stacks to one column on mobile) ── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-7">
 
         {/* LEFT COLUMN */}
         <div className="flex flex-col gap-7">
@@ -190,7 +190,7 @@ export default function PageContactForm() {
           </div>
 
           {/* Date + Time */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="preferredDate" className={labelBase}>
                 Preferred Date <span className="text-[var(--text-primary)]" aria-hidden="true">*</span>
@@ -239,7 +239,7 @@ export default function PageContactForm() {
         </div>
 
         {/* MESSAGE — full width, spans both columns */}
-        <div className="col-span-2">
+        <div className="col-span-1 md:col-span-2">
           <label htmlFor="message" className={labelBase}>Message</label>
           <textarea
             {...register("message")}
@@ -254,7 +254,7 @@ export default function PageContactForm() {
         </div>
 
         {/* SUBMIT — left aligned, spans both columns */}
-        <div className="col-span-2">
+        <div className="col-span-1 md:col-span-2">
           <Button
             type="submit"
             variant="secondary"
