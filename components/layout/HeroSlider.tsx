@@ -108,6 +108,7 @@ function SlideLayer({
         <img
           {...desktopRest}
           decoding={priority ? "sync" : "async"}
+          fetchPriority={priority ? "high" : undefined}
           className="object-cover object-center w-full h-full"
         />
       </picture>

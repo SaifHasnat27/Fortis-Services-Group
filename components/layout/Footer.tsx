@@ -102,7 +102,7 @@ export default function Footer({ className = 'bg-base' }: { className?: string }
               href="https://integrateai.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 underline hover:text-blue-400 transition-colors"
+              className="text-[#1E90FF] hover:text-[#8EC5FF] transition-colors"
             >
               Integrate AI
             </a>
@@ -123,7 +123,7 @@ export default function Footer({ className = 'bg-base' }: { className?: string }
                 href="https://integrateai.app/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 underline hover:text-blue-400 transition-colors"
+                className="text-[#1E90FF] hover:text-[#8EC5FF] transition-colors"
               >
                 Integrate AI
               </a>

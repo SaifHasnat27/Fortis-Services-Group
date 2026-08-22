@@ -78,6 +78,7 @@ export default function ServiceCards({ cardClassName = 'bg-base' }: { cardClassN
                             {/* Learn more — mt-auto keeps it pinned to bottom */}
                             <Link
                                 href={`/services?tab=${service.id}`}
+                                aria-label={`Learn more about ${service.name}`}
                                 className="mt-auto inline-flex items-center self-start text-[0.6875rem] font-medium tracking-[0.12em] uppercase text-[var(--text-primary)] hover:text-[var(--text-accent)] transition-colors duration-[var(--transition-fast)] border-b md:border-b-2 border-current pb-0.5"
                             >
                                 Learn more
