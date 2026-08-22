@@ -1,12 +1,9 @@
 import { BUSINESS } from "@/lib/constants";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { Mail, Phone } from "lucide-react";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `Terms & Conditions | ${BUSINESS.name}`,
-  description: `Read the ${BUSINESS.name} Terms & Conditions governing use of our website and services.`,
-};
+export const metadata = buildMetadata("terms");
 
 export default function TermsPage() {
   return (

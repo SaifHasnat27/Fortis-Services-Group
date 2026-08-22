@@ -6,7 +6,7 @@ export const BUSINESS = {
   whatsappRaw: "+61408333818",
   whatsappLink: "https://wa.me/61408333818",
   email: "service@fortisservicesgroup.com.au",
-  url: "https://fortisservicesgroup.com.au",
+  url: "https://www.fortisservicesgroup.com.au",
   address: "",
   directionsUrl: "",
   openingHours: {

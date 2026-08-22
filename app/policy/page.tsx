@@ -1,12 +1,9 @@
 import { BUSINESS } from "@/lib/constants";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { Mail, Phone } from "lucide-react";
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `Privacy Policy | ${BUSINESS.name}`,
-  description: `Read the ${BUSINESS.name} Privacy Policy to understand how we collect, use, and protect your personal information.`,
-};
+export const metadata = buildMetadata("policy");
 
 export default function PrivacyPolicyPage() {
   return (
