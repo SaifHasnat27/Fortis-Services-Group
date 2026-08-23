@@ -24,17 +24,41 @@ export default function ContactPage() {
 
   // ---- Existing scroll-reveal for sections that still use the class ----
   useGSAP(() => {
-    const revealSections = gsap.utils.toArray('.scroll-reveal');
-    revealSections.forEach((section: any) => {
-      gsap.from(section.children, {
-        y: 40,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: section, start: 'top 85%' },
-      });
-    });
+    /* Wrapped in matchMedia purely to honour prefers-reduced-motion. Users who
+       set that OS preference often do so for vestibular disorders, where
+       sliding content can cause real nausea — GSAP's guidance is to run the
+       tween with duration: 0 rather than skip it, so the elements still end up
+       visible (gsap.from starts them at autoAlpha: 0) but simply snap into
+       place with no travel.
+
+       For everyone else every value below is unchanged from before. */
+    const mm = gsap.matchMedia();
+
+    mm.add(
+      {
+        reduceMotion: '(prefers-reduced-motion: reduce)',
+        normalMotion: '(prefers-reduced-motion: no-preference)',
+      },
+      (ctx) => {
+        const { reduceMotion } = ctx.conditions!;
+
+        gsap.utils.toArray<HTMLElement>('.scroll-reveal').forEach((section) => {
+          gsap.from(section.children, {
+            y: reduceMotion ? 0 : 40,
+            // autoAlpha over opacity: at 0 GSAP also sets visibility:hidden, so
+            // a not-yet-revealed section can't swallow taps on mobile.
+            autoAlpha: 0,
+            stagger: reduceMotion ? 0 : 0.15,
+            duration: reduceMotion ? 0 : 0.8,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: section, start: 'top 85%' },
+          });
+        });
+      },
+      container.current ?? undefined // scope selector text to this page
+    );
+
+    return () => mm.revert();
   }, { scope: container });
 
   // ---- GSAP timeline for the form + info cards (the "wow" moment) ----
@@ -42,64 +66,100 @@ export default function ContactPage() {
     () => {
       if (!formSectionRef.current) return;
 
-      // Respect reduced motion: if user prefers reduced motion, just set elements visible immediately
+      /* One matchMedia, three named conditions.
+
+         NOTE: an `isMobile` condition is REQUIRED here, not optional. GSAP only
+         runs this handler when at least one condition matches. Previously the
+         only conditions were `reduceMotion` and `isDesktop`, so on a phone
+         (< 1024px, no reduced-motion preference) NOTHING matched, the handler
+         never ran, and the form/info cards got no entrance at all — while
+         QuickContact and the FAQ still animated via .scroll-reveal. That
+         inconsistency is what this block fixes.
+
+         Desktop keeps the full left/right glide with the 3D twist. Mobile is a
+         single column, where sliding cards in horizontally and rotating them on
+         Y reads badly and costs more compositing on weaker hardware — so mobile
+         gets the same calm fade-up used by .scroll-reveal elsewhere on the page. */
       const mm = gsap.matchMedia();
       mm.add(
         {
-          reduceMotion: '(prefers-reduced-motion: reduce)',
           isDesktop: `(min-width: ${BUSINESS.mobileBreakpoint + 1}px)`,
+          isMobile: `(max-width: ${BUSINESS.mobileBreakpoint}px)`,
+          reduceMotion: '(prefers-reduced-motion: reduce)',
         },
         (ctx) => {
-          const { reduceMotion } = ctx.conditions!;
-          const formCard = (formSectionRef.current as HTMLElement).querySelector('.form-card');
-          const infoCards = (formSectionRef.current as HTMLElement).querySelectorAll('.info-card');
+          const { isDesktop, reduceMotion } = ctx.conditions!;
+          const root = formSectionRef.current as HTMLElement;
+          const formCard = root.querySelector('.form-card');
+          const infoCards = root.querySelectorAll('.info-card');
 
           if (!formCard) return;
 
+          const cards = [formCard, ...infoCards];
+
           if (reduceMotion) {
-            // Zero duration – elements appear instantly
-            gsap.set([formCard, ...infoCards], { opacity: 1, x: 0, rotationY: 0 });
+            // Vestibular safety: no motion at all, just make sure nothing is
+            // left hidden by a previously-reverted tween.
+            gsap.set(cards, { autoAlpha: 1, x: 0, y: 0, rotationY: 0 });
             return;
           }
 
-          // Build the timeline
           const tl = gsap.timeline({
             scrollTrigger: {
-              trigger: formSectionRef.current,
+              trigger: root,
               start: 'top 80%',
               toggleActions: 'play none none reverse',
             },
           });
 
-          // Form card glides in from the left
-          tl.fromTo(
-            formCard,
-            { x: -60, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.9, ease: 'power3.out' },
-            0
-          );
-
-          // Info cards swoop in from the right with a subtle 3D twist, staggered
-          if (infoCards.length) {
+          if (isDesktop) {
+            // Form card glides in from the left
             tl.fromTo(
-              infoCards,
-              { x: 60, opacity: 0, rotationY: 15 },
+              formCard,
+              { x: -60, autoAlpha: 0 },
+              { x: 0, autoAlpha: 1, duration: 0.9, ease: 'power3.out' },
+              0
+            );
+
+            // Info cards swoop in from the right with a subtle 3D twist, staggered
+            if (infoCards.length) {
+              tl.fromTo(
+                infoCards,
+                { x: 60, autoAlpha: 0, rotationY: 15 },
+                {
+                  x: 0,
+                  autoAlpha: 1,
+                  rotationY: 0,
+                  duration: 0.75,
+                  ease: 'back.out(1.2)',
+                  stagger: 0.12,
+                  clearProps: 'transform', // clean up inline styles after animation
+                },
+                '-=0.3' // overlap slightly for fluidity
+              );
+            }
+          } else {
+            // Mobile: one column, so a vertical fade-up matching .scroll-reveal
+            // (y: 40 / stagger / power2.out) instead of horizontal slides.
+            tl.fromTo(
+              cards,
+              { y: 40, autoAlpha: 0 },
               {
-                x: 0,
-                opacity: 1,
-                rotationY: 0,
-                duration: 0.75,
-                ease: 'back.out(1.2)',
-                stagger: 0.12,
-                clearProps: 'transform', // clean up inline styles after animation
+                y: 0,
+                autoAlpha: 1,
+                duration: 0.8,
+                ease: 'power2.out',
+                stagger: 0.15,
+                clearProps: 'transform',
               },
-              '-=0.3' // overlap slightly for fluidity
+              0
             );
           }
 
-          // Add will-change during animation, then remove it
-          tl.set([formCard, ...infoCards], { willChange: 'transform' }, 0);
-          tl.set([formCard, ...infoCards], { willChange: 'auto' });
+          // will-change only for the duration of the animation, per GSAP's
+          // performance guidance — never leave it on permanently.
+          tl.set(cards, { willChange: 'transform' }, 0);
+          tl.set(cards, { willChange: 'auto' });
         },
         formSectionRef.current // scope so selectors are local (optional but good practice)
       );
