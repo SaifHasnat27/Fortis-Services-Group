@@ -1,12 +1,12 @@
 "use client";
 
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/Tabs';
+import { Tabs, TabsList, TabsTrigger, TabsContent, useTabs } from '@/components/ui/Tabs';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import Button from '@/components/ui/Button';
 import { services } from '@/lib/servicesData';
@@ -16,14 +16,39 @@ import { PAGE_BANNERS } from '@/lib/pageBannerData';
 // Derive valid tab IDs dynamically from the data source
 const VALID_TABS = services.map(s => s.id);
 
-function ServicesContent() {
+/**
+ * Applies ?tab=<id> to the surrounding <Tabs>. Renders nothing.
+ *
+ * This is deliberately the ONLY component on the page that calls
+ * useSearchParams(). That hook forces everything up to the nearest <Suspense>
+ * to bail out of prerendering, so keeping it isolated here means the whole
+ * tab section — image, headings, copy, bullets — still ships in the static
+ * HTML. Previously useSearchParams sat in ServicesContent, which bailed out
+ * the entire section: the static HTML contained only a zero-height
+ * BAILOUT_TO_CLIENT_SIDE_RENDERING placeholder, the footer rendered directly
+ * under the banner, and hydration then pushed it ~1000px down — CLS 0.287.
+ *
+ * Do not move useSearchParams back up into the page component.
+ */
+function TabFromQuery() {
   const searchParams = useSearchParams();
-  const tabParam = searchParams.get('tab');
-  const activeTab = tabParam && VALID_TABS.includes(tabParam) ? tabParam : services[0].id;
+  const tab = searchParams.get('tab');
+  const { setActiveTab } = useTabs();
 
+  useEffect(() => {
+    if (tab && VALID_TABS.includes(tab)) setActiveTab(tab);
+  }, [tab, setActiveTab]);
+
+  return null;
+}
+
+function ServicesContent() {
   return (
     <SectionWrapper>
-      <Tabs key={activeTab} defaultValue={activeTab}>
+      <Tabs defaultValue={services[0].id}>
+        <Suspense fallback={null}>
+          <TabFromQuery />
+        </Suspense>
         <TabsList className="flex justify-start">
           {services.map(s => (
             <TabsTrigger key={s.id} value={s.id}>{s.name}</TabsTrigger>
@@ -93,9 +118,7 @@ export default function ServicesPage() {
       className="w-full bg-base-secondary"
     >
       <PageBanner {...PAGE_BANNERS.services} />
-      <Suspense fallback={null}>
-        <ServicesContent />
-      </Suspense>
+      <ServicesContent />
     </motion.div>
   );
 }

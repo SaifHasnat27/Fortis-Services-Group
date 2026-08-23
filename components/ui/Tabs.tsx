@@ -12,6 +12,19 @@ type TabsContextType = {
 
 const TabsContext = createContext<TabsContextType | undefined>(undefined);
 
+/**
+ * Read/write the active tab from inside a <Tabs> subtree.
+ *
+ * Exists so a tiny child can set the active tab without the PARENT needing to
+ * know it — which is what keeps `useSearchParams` out of the page's render
+ * path. See app/services/page.tsx <TabFromQuery />.
+ */
+export function useTabs() {
+  const ctx = useContext(TabsContext);
+  if (!ctx) throw new Error('useTabs must be used within Tabs');
+  return ctx;
+}
+
 export function Tabs({
   defaultValue,
   children,
