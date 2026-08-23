@@ -12,6 +12,12 @@ type TabsContextType = {
 
 const TabsContext = createContext<TabsContextType | undefined>(undefined);
 
+/* ARIA ids are derived from the tab's `value` (already unique per service),
+   so the trigger and its panel can point at each other without threading
+   generated ids through props. */
+const tabId = (value: string) => `tab-${value}`;
+const panelId = (value: string) => `tabpanel-${value}`;
+
 /**
  * Read/write the active tab from inside a <Tabs> subtree.
  *
@@ -126,8 +132,25 @@ export function TabsList({
         )}
       </div>
 
-      {/* ── Desktop: original tab buttons ────────────── */}
+      {/* ── Desktop: original tab buttons ──────────────
+          role="tablist" is REQUIRED: ARIA only allows role="tab" inside a
+          tablist, and without it screen readers announce three orphaned tabs
+          with no container and no discoverable panel. Arrow-key navigation
+          between tabs is part of the same pattern and is handled here. */}
       <div
+        role="tablist"
+        onKeyDown={(e) => {
+          if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+          e.preventDefault();
+          const i = options.findIndex(o => o.value === activeTab);
+          if (i === -1) return;
+          const next = e.key === 'ArrowRight'
+            ? (i + 1) % options.length
+            : (i - 1 + options.length) % options.length;
+          setActiveTab(options[next].value);
+          // Move focus with selection, as the ARIA tabs pattern expects.
+          document.getElementById(tabId(options[next].value))?.focus();
+        }}
         className={`
           hidden md:flex flex-wrap items-center justify-start
           gap-2 md:gap-3
@@ -158,8 +181,13 @@ export function TabsTrigger({
   return (
     <button
       onClick={() => context.setActiveTab(value)}
-      aria-selected={isActive}
       role="tab"
+      id={tabId(value)}
+      aria-selected={isActive}
+      aria-controls={panelId(value)}
+      /* Roving tabindex: the tablist is a single tab stop, and arrow keys move
+         between tabs within it. Only the selected tab is reachable via Tab. */
+      tabIndex={isActive ? 0 : -1}
       className={`
         px-6 py-2.5
         rounded-[var(--radius-btn)]
@@ -195,19 +223,41 @@ export function TabsContent({
   const isActive = context.activeTab === value;
 
   useGSAP(() => {
-    if (isActive && container.current) {
+    if (!container.current) return;
+    if (isActive) {
       gsap.fromTo(
         container.current,
         { opacity: 0, y: 16 },
         { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }
       );
+    } else {
+      /* Panels now persist in the DOM (see `hidden` below), so GSAP's inline
+         opacity/transform would survive on a hidden panel and still be there
+         when it is shown again — the fromTo above re-sets them, but clearing
+         keeps the element clean and avoids a stale transform if the animation
+         is ever interrupted mid-flight. */
+      gsap.set(container.current, { clearProps: 'opacity,transform' });
     }
   }, { scope: container, dependencies: [isActive] });
 
-  if (!isActive) return null;
-
+  /* Every panel stays in the DOM; inactive ones carry `hidden`.
+     `return null` for inactive panels would leave each tab's aria-controls
+     pointing at an element that does not exist — a dangling reference that
+     axe-core and Lighthouse both flag. `hidden` is what the ARIA tabs pattern
+     specifies: it removes the panel from the accessibility tree AND from
+     layout (display:none), so there is no visual or layout difference. */
   return (
-    <div ref={container} className={className}>
+    <div
+      ref={container}
+      role="tabpanel"
+      id={panelId(value)}
+      aria-labelledby={tabId(value)}
+      hidden={!isActive}
+      /* Makes the panel itself focusable so keyboard users can Tab straight
+         from the selected tab into its content. */
+      tabIndex={isActive ? 0 : -1}
+      className={className}
+    >
       {children}
     </div>
   );
