@@ -2,11 +2,30 @@ import React from 'react';
 import { getImageProps } from 'next/image';
 import { BUSINESS } from '@/lib/constants';
 
+/**
+ * Upper bound of the mobile banner crop, derived from the shared
+ * BUSINESS.mobileBreakpoint (1023) so this component has no breakpoint of its
+ * own to fall out of step.
+ *
+ * The `.98` matters: mobileBreakpoint is the last mobile pixel, so the old
+ * `max-width: 1023px` / `min-width: 1024px` pair left anything between them
+ * matching NEITHER query — real on devices with a fractional CSS width
+ * (e.g. 1023.5px at a non-integer devicePixelRatio). Using 1023.98 as a
+ * single boundary closes that gap.
+ *
+ * This also lines up with the `md:aspect-[3/1]` class on the <section> below,
+ * which flips the container's shape at the same width — `md` is 1024px in
+ * this project, overridden in globals.css (`@theme { --breakpoint-md: 1024px }`),
+ * not Tailwind's stock 768px.
+ */
+const MOBILE_BANNER_MAX_WIDTH = BUSINESS.mobileBreakpoint + 0.98;
+
 interface PageBannerProps {
   heading: string;
   subheading: string;
   desktopSrc: string;
   mobileSrc: string;
+  imageAlt: string;
 }
 
 export default function PageBanner({
@@ -14,21 +33,28 @@ export default function PageBanner({
   subheading,
   desktopSrc,
   mobileSrc,
+  imageAlt,
 }: PageBannerProps) {
   const commonHeroProps = {
-    alt: heading,
+    alt: imageAlt,
     fill: true,
     sizes: "100vw",
     priority: true,
   };
 
-  const {
-    props: { srcSet: desktopHeroSrcSet, ...desktopHeroRest },
-  } = getImageProps({ ...commonHeroProps, src: desktopSrc });
-
+  /* Only the mobile srcSet is pulled out — it feeds the <source> element.
+     The desktop props are kept WHOLE and spread onto the fallback <img>, so
+     that <img> keeps its own src/srcSet. (The previous version destructured
+     srcSet off the desktop props too, leaving the fallback <img> with no
+     image source at all.) */
   const {
     props: { srcSet: mobileHeroSrcSet },
   } = getImageProps({ ...commonHeroProps, src: mobileSrc });
+
+  const { props: desktopHeroProps } = getImageProps({
+    ...commonHeroProps,
+    src: desktopSrc,
+  });
 
   return (
     <>
@@ -66,11 +92,27 @@ export default function PageBanner({
 
       <section className="relative w-full aspect-[4/5] md:aspect-[3/1] overflow-hidden">
         <div className="absolute inset-0 z-0">
+          {/* <picture> rather than two <img> tags with hidden/block classes:
+              the browser evaluates these media queries and downloads exactly
+              ONE source. Hiding an <img> with CSS does not reliably prevent
+              its fetch — the preload scanner runs before styles are applied,
+              so that approach can pull both crops down on some browsers. */}
           <picture>
-            <source media={`(max-width: ${BUSINESS.mobileBreakpoint}px)`} srcSet={mobileHeroSrcSet} />
-            <source media={`(min-width: ${BUSINESS.mobileBreakpoint + 1}px)`} srcSet={desktopHeroSrcSet} />
+            <source
+              media={`(max-width: ${MOBILE_BANNER_MAX_WIDTH}px)`}
+              srcSet={mobileHeroSrcSet}
+            />
+            {/* No second <source> for desktop: the <img> below already carries
+                the desktop image, and it is what the browser uses whenever the
+                mobile query does not match. One less place to get out of sync,
+                and the fallback is a real image rather than an empty tag. */}
             <img
-              {...desktopHeroRest}
+              {...desktopHeroProps}
+              /* alt is already inside desktopHeroProps via commonHeroProps,
+                 but ESLint's jsx-a11y rule cannot see through a spread —
+                 stating it explicitly satisfies the linter and makes the
+                 accessible name obvious when reading the markup. */
+              alt={imageAlt}
               decoding="sync"
               fetchPriority="high"
               className="object-cover object-top"
