@@ -10,14 +10,12 @@ import "./globals.css";
 /* Active FSG fonts — drive --font-display / --font-body tokens */
 const syne = Syne({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-display",
   display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-body",
   display: "swap",
 });
