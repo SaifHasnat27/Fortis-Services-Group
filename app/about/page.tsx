@@ -198,9 +198,9 @@ export default function AboutPage() {
               <div className="flex items-center gap-4 p-6 bg-base rounded-[var(--radius-card)] border border-[var(--border)] transition-all duration-[var(--transition-base)] hover:border-[var(--accent)] hover:shadow-md cursor-pointer">
                 <MessageSquare className="w-6 h-6 text-[var(--accent)] shrink-0 transition-transform group-hover:scale-110" />
                 <div>
-                  <h4 className="font-medium text-[var(--text-primary)] mb-1 group-hover:text-[var(--accent)] transition-colors">
+                  <h3 className="font-medium text-[var(--text-primary)] mb-1 group-hover:text-[var(--accent)] transition-colors">
                     Request a Free Quote
-                  </h4>
+                  </h3>
                   <p className="text-[var(--text-secondary)] font-light text-sm">
                     Tell us about your site and requirements. We will get back to you within 24 hours.
                   </p>
