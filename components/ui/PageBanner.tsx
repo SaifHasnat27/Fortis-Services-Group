@@ -72,6 +72,7 @@ export default function PageBanner({
             <img
               {...desktopHeroRest}
               decoding="sync"
+              fetchPriority="high"
               className="object-cover object-top"
             />
           </picture>

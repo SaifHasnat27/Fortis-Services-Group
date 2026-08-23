@@ -32,9 +32,9 @@ export default function Footer({ className = 'bg-base' }: { className?: string }
 
           {/* Explore Links */}
           <div className="text-center">
-            <h4 className="font-[family-name:var(--font-display)] text-xl text-[var(--text-primary)] mb-4">
+            <h3 className="font-[family-name:var(--font-display)] text-xl text-[var(--text-primary)] mb-4">
               Explore
-            </h4>
+            </h3>
             <ul className="flex flex-col gap-3 text-[var(--text-secondary)] font-light items-center">
               <li><Link href="/" className="hover:text-[var(--text-primary)] transition-colors">Home</Link></li>
               <li><Link href="/services" className="hover:text-[var(--text-primary)] transition-colors">Services</Link></li>
@@ -46,9 +46,9 @@ export default function Footer({ className = 'bg-base' }: { className?: string }
 
           {/* Contact Info */}
           <div className="text-center">
-            <h4 className="font-[family-name:var(--font-display)] text-xl text-[var(--text-primary)] mb-4">
+            <h3 className="font-[family-name:var(--font-display)] text-xl text-[var(--text-primary)] mb-4">
               Contact Us
-            </h4>
+            </h3>
             <ul className="flex flex-col gap-3 text-[var(--text-secondary)] font-light items-center">
               <li>
                 <a href={`tel:${BUSINESS.phoneRaw}`} className="group flex items-center gap-3 hover:text-[var(--text-primary)] transition-colors">

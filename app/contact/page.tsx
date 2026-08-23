@@ -120,9 +120,15 @@ export default function ContactPage() {
     >
       <PageBanner {...PAGE_BANNERS.contact} />
 
-      {/* QuickContact – keeps the default scroll-reveal */}
+      {/* QuickContact – keeps the default scroll-reveal.
+          The h2 is visually hidden: the other pages that use QuickContact
+          (home, areas-served) each have a visible h2 above it, so its
+          internal h3s sit correctly. This page has no visible section
+          heading by design, so a screen-reader-only h2 keeps the heading
+          outline sequential (h1 -> h2 -> h3) without changing the layout. */}
       <SectionWrapper noPadding>
         <div className="scroll-reveal">
+          <h2 className="sr-only">Contact us directly</h2>
           <QuickContact />
         </div>
       </SectionWrapper>
