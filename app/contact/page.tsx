@@ -54,11 +54,13 @@ export default function ContactPage() {
             scrollTrigger: { trigger: section, start: 'top 85%' },
           });
         });
-      },
-      container.current ?? undefined // scope selector text to this page
+      }
+      // No scope argument needed: useGSAP's { scope: container } below already
+      // scopes selector text to this page.
     );
 
-    return () => mm.revert();
+    // No mm.revert() here — useGSAP reverts its context (matchMedia included)
+    // on unmount automatically.
   }, { scope: container });
 
   // ---- GSAP timeline for the form + info cards (the "wow" moment) ----
@@ -104,20 +106,52 @@ export default function ContactPage() {
             return;
           }
 
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: root,
-              start: 'top 80%',
-              toggleActions: 'play none none reverse',
-            },
-          });
+          /* will-change is applied here, up front, rather than as a tl.set() at
+             position 0. A set inside the timeline fires on the same frame as
+             the first animated frame — too late for the browser to promote the
+             layer, so it was close to a no-op. Each tween's
+             clearProps: 'transform,willChange' removes it once the card lands,
+             so the hint never outlives the animation. */
+          gsap.set(cards, { willChange: 'transform' });
 
           if (isDesktop) {
+            /* Desktop: all three cards are visible together in a 12-col grid,
+               so one shared trigger and one timeline is right — the stagger
+               reads as a single choreographed entrance.
+
+               toggleActions was 'play none none reverse', which fought the
+               clearProps below: clearProps strips the inline transform the
+               moment the tween finishes, so scrolling back up asked GSAP to
+               reverse a transform it had just wiped. Worse for a contact form,
+               reversing re-hides the card (autoAlpha: 0 -> visibility: hidden)
+               if the user scrolls up mid-typing. Play once and stay put.
+
+               refreshPriority: this section sits in the MIDDLE of the page, but
+               its ScrollTrigger is created in the second useGSAP hook — after
+               the first hook has already created the FAQ trigger below it.
+               ScrollTrigger refreshes in creation order unless told otherwise.
+               Lower numbers refresh first; -1 pulls this one ahead of the
+               default-0 .scroll-reveal triggers. */
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: root,
+                start: 'top 80%',
+                toggleActions: 'play none none none',
+                refreshPriority: -1,
+              },
+            });
+
             // Form card glides in from the left
             tl.fromTo(
               formCard,
               { x: -60, autoAlpha: 0 },
-              { x: 0, autoAlpha: 1, duration: 0.9, ease: 'power3.out' },
+              {
+                x: 0,
+                autoAlpha: 1,
+                duration: 0.9,
+                ease: 'power3.out',
+                clearProps: 'transform,willChange',
+              },
               0
             );
 
@@ -133,38 +167,55 @@ export default function ContactPage() {
                   duration: 0.75,
                   ease: 'back.out(1.2)',
                   stagger: 0.12,
-                  clearProps: 'transform', // clean up inline styles after animation
+                  // clearProps drops the inline transform AND the will-change
+                  // hint once the card has landed, so neither lingers on an
+                  // element that is now static.
+                  clearProps: 'transform,willChange',
                 },
                 '-=0.3' // overlap slightly for fluidity
               );
             }
           } else {
-            // Mobile: one column, so a vertical fade-up matching .scroll-reveal
-            // (y: 40 / stagger / power2.out) instead of horizontal slides.
-            tl.fromTo(
-              cards,
-              { y: 40, autoAlpha: 0 },
-              {
-                y: 0,
-                autoAlpha: 1,
-                duration: 0.8,
-                ease: 'power2.out',
-                stagger: 0.15,
-                clearProps: 'transform',
-              },
-              0
-            );
-          }
+            /* Mobile: one column, so the three cards are far apart vertically.
+               A single shared trigger on the wrapper fired all three at
+               'top 80%' — meaning the two info cards finished animating while
+               still well below the fold, and you scrolled down to find them
+               already static. Give each card its OWN trigger instead, so each
+               reveals as it comes into view. Same approach as the QuickContact
+               cards and ServiceCards.
 
-          // will-change only for the duration of the animation, per GSAP's
-          // performance guidance — never leave it on permanently.
-          tl.set(cards, { willChange: 'transform' }, 0);
-          tl.set(cards, { willChange: 'auto' });
-        },
-        formSectionRef.current // scope so selectors are local (optional but good practice)
+               No stagger/delay here: with per-card triggers the scroll itself
+               provides the offset, and an added delay would just make a card
+               sit visible-but-unanimated for a moment after entering view. */
+            cards.forEach((card, i) => {
+              gsap.fromTo(
+                card,
+                { y: 40, autoAlpha: 0 },
+                {
+                  y: 0,
+                  autoAlpha: 1,
+                  duration: 0.8,
+                  ease: 'power2.out',
+                  clearProps: 'transform,willChange',
+                  scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%', // matches .scroll-reveal elsewhere
+                    toggleActions: 'play none none none',
+                    // Lower refreshes first, so ascending values keep the
+                    // refresh order top-to-bottom down the column. Starts at
+                    // -3 so all three still sit ahead of the default-0
+                    // .scroll-reveal trigger on the FAQ below.
+                    refreshPriority: -3 + i,
+                  },
+                }
+              );
+            });
+          }
+        }
+        // No scope argument: useGSAP's { scope: formSectionRef } below covers it.
       );
 
-      return () => mm.revert(); // clean up matchMedia on unmount
+      // No mm.revert() here — useGSAP handles context cleanup on unmount.
     },
     { scope: formSectionRef }
   );
@@ -180,14 +231,18 @@ export default function ContactPage() {
     >
       <PageBanner {...PAGE_BANNERS.contact} />
 
-      {/* QuickContact – keeps the default scroll-reveal.
+      {/* QuickContact.
           The h2 is visually hidden: the other pages that use QuickContact
           (home, areas-served) each have a visible h2 above it, so its
           internal h3s sit correctly. This page has no visible section
           heading by design, so a screen-reader-only h2 keeps the heading
           outline sequential (h1 -> h2 -> h3) without changing the layout. */}
       <SectionWrapper noPadding>
-        <div className="scroll-reveal">
+        {/* No .scroll-reveal wrapper here any more: QuickContact now reveals
+            its own cards individually (per-card whileInView, like ServiceCards).
+            Leaving the wrapper on would fade the whole block in first and then
+            fade each card again on top of it — a visible double animation. */}
+        <div>
           <h2 className="sr-only">Contact us directly</h2>
           <QuickContact />
         </div>

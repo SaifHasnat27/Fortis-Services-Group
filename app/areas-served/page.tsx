@@ -141,8 +141,11 @@ export default function AreasServedPage() {
           <p className="text-[var(--text-secondary)] font-light text-sm leading-[var(--leading-relaxed)]">
             Our service network covers all areas across Sydney, Wollongong, Central Coast and surrounding regions. If your location isn&apos;t listed above, get in touch, chances are we&apos;ve already got you covered.
           </p>
-          <QuickContact />
         </div>
+        {/* Outside .scroll-reveal: QuickContact reveals its own cards
+            individually now (per-card whileInView, like ServiceCards), so
+            wrapping it would double-animate them. */}
+        <QuickContact />
       </SectionWrapper>
     </motion.div>
   );

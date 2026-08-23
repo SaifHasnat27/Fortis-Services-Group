@@ -51,7 +51,7 @@ export default function Home() {
         <div className="scroll-reveal">
           <div className="card !p-10 md:!p-12 hover:border-[var(--border-dark)] transition-colors duration-[var(--transition-fast)]">
             <p className="text-[0.6875rem] font-medium tracking-[0.18em] uppercase text-[var(--text-muted)] mb-4">
-              We're Here to Help
+              We’re Here to Help
             </p>
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1] tracking-[-0.02em] mb-8 text-[var(--text-primary)]">
               Get a Free Quote
@@ -70,10 +70,14 @@ export default function Home() {
 
       {/* 8. Quick Contact */}
       <SectionWrapper className="bg-base-secondary" id="quick-contact">
+        {/* Heading keeps .scroll-reveal; QuickContact sits outside it because
+            it now reveals its own cards individually (per-card whileInView,
+            like ServiceCards). Wrapping it would animate the block and then
+            each card again on top — a visible double animation. */}
         <div className="scroll-reveal">
           <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.25rem,4vw,3rem)] leading-[1.1] tracking-[-0.02em] mb-3 text-left">Get in Touch</h2>
-          <QuickContact />
         </div>
+        <QuickContact />
       </SectionWrapper>
 
     </div>
