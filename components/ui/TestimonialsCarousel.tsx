@@ -42,7 +42,6 @@ export const testimonials: Testimonial[] = [
 
 export default function TestimonialsCarousel({ className = 'bg-base-secondary', cardClassName = 'bg-base' }: { className?: string; cardClassName?: string }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const indexRef = useRef(currentIndex);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
@@ -113,12 +112,11 @@ export default function TestimonialsCarousel({ className = 'bg-base-secondary', 
 
   return (
     <section
-      ref={containerRef}
       className={`py-12 md:py-20 ${className} overflow-hidden`}
       aria-label="Client testimonials"
     >
       <div className="section-wrapper max-w-4xl mx-auto">
-        <div className="scroll-reveal">
+        <div>
           <div className="mb-14">
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(2.25rem,4vw,3rem)] leading-[1.1] tracking-[-0.02em] text-left">
               Client Reviews
