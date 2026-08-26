@@ -1,17 +1,25 @@
+"use client";
+
+import React, { useRef } from 'react';
+import dynamic from 'next/dynamic';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import QuickContact from '@/components/contact/QuickContact';
 import TestimonialsCarousel from '@/components/ui/TestimonialsCarousel';
 import HeroBanner from '@/components/ui/HeroBanner';
 import ServiceCards from '@/components/servicecards/ServiceCards';
 import FAQ from '@/components/servicecards/faq';
-import PageContactForm from '@/components/forms/PageContactForm';
+const PageContactForm = dynamic(() => import('@/components/forms/PageContactForm'), {
+  ssr: false,
+});
 import HomeSpecialty from '@/components/layout/HomeSpecialty';
 import ICP from '@/components/servicecards/icp';
 import WhyUs from '@/components/servicecards/whyUs';
 
 export default function Home() {
+  const container = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="w-full">
+    <div ref={container} className="w-full">
 
       {/* 1. Hero */}
       <HeroBanner />
