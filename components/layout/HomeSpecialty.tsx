@@ -45,13 +45,13 @@ export default function HomeSpecialty() {
         mobileSrc="/images/specialty-mobile.webp"
         alt="Fortis Services Group commercial asset compliance and maintenance management"
         overlayOpacity={0}
-        className="specialty-section h-[70vh] flex items-center"
+        className="specialty-section min-h-[70vh] py-12 md:py-16 flex items-center"
       >
         <div className="section-wrapper relative z-10 w-full">
           <Card3DHoverFit>
             <div
               ref={specialtyCardRef}
-              className="max-w-xl p-9 md:p-14 rounded-[var(--radius-card)] text-left bg-base backdrop-blur-sm border border-[var(--border)]"
+              className="card !bg-base !p-9 md:!p-14 max-w-xl rounded-[var(--radius-card)] text-left backdrop-blur-sm hover:!transform-none hover:!shadow-[var(--shadow-card)] hover:!border-[var(--border)]"
             >
               <h2 className="font-[family-name:var(--font-display)] text-4xl mb-4 text-text-primary">
                 Simplify Asset Compliance & Maintenance

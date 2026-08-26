@@ -45,13 +45,14 @@ export default function HeroBanner() {
         }
       `}</style>
 
-      <section className="relative w-full">
-        <div className="relative w-full aspect-[2/3] md:aspect-[5/2] overflow-hidden">
+      <section className="relative w-full grid grid-cols-1 grid-rows-1 overflow-hidden">
+        <div className="col-start-1 row-start-1 relative w-full aspect-[2/3] md:aspect-[5/2] self-stretch overflow-hidden">
           <HeroSlider />
-          <div className="absolute inset-0 z-20 flex items-center">
-            <div className="section-wrapper w-full px-5 md:px-10">
-              <div className="w-full text-left">
-                <h1 className="hero-headline font-[family-name:var(--font-display)] font-bold leading-[1.1] tracking-[-0.01em] text-[clamp(1.75rem,5.5vw,3rem)] text-white max-w-5xl">
+        </div>
+        <div className="col-start-1 row-start-1 z-20 flex items-center py-10 md:py-0">
+          <div className="section-wrapper w-full px-5 md:px-10">
+            <div className="w-full text-left">
+                <h1 className="hero-headline font-[family-name:var(--font-display)] font-bold leading-[1.1] tracking-[-0.01em] text-[clamp(1.625rem,4vw+0.5rem,3rem)] text-white max-w-5xl">
                   Asset Maintenance, Compliance & Trade Services for Sydney & Surrounding Businesses
                 </h1>
                 <p className="hero-subtitle text-base sm:text-lg xl:text-xl text-white max-w-3xl mt-5 leading-relaxed">
@@ -73,7 +74,6 @@ export default function HeroBanner() {
               </div>
             </div>
           </div>
-        </div>
       </section>
     </>
   );
