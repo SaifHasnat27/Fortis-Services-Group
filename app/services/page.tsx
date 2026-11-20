@@ -58,7 +58,7 @@ function ServicesContent() {
         {services.map(s => (
           <TabsContent key={s.id} value={s.id}>
             <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-12 items-start">
-              <div className="relative aspect-[4/5] rounded-[var(--radius-card)] overflow-hidden">
+              <div className="relative aspect-[3/4] rounded-[var(--radius-card)] overflow-hidden">
                 <Image src={s.image} alt={s.name} fill className="object-cover" />
               </div>
               <div>

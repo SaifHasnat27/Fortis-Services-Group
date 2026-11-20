@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Zap, Wrench, CheckCircle2 } from 'lucide-react';
+import { Snowflake, Building2, Zap, Droplets, AirVent, Hammer, CheckCircle2 } from 'lucide-react';
 import { Card3DHover } from '@/components/ui/SimpleAnimations';
 import { services } from '@/lib/servicesData';
 import type { LucideIcon } from 'lucide-react';
@@ -11,7 +11,7 @@ import type { LucideIcon } from 'lucide-react';
 
 // ─── Icon Map ────────────────────────────────────────────
 const iconMap: Record<string, LucideIcon> = {
-    ShieldCheck, Zap, Wrench,
+    Snowflake, Building2, Zap, Droplets, AirVent, Hammer,
 };
 
 export default function ServiceCards({ cardClassName = 'bg-base' }: { cardClassName?: string }) {
