@@ -53,11 +53,11 @@ export default function HeroBanner() {
           <div className="section-wrapper w-full px-5 md:px-10">
             <div className="w-full text-left">
                 <h1 className="hero-headline font-[family-name:var(--font-display)] font-bold leading-[1.1] tracking-[-0.01em] text-[clamp(1.625rem,4vw+0.5rem,3rem)] text-white max-w-5xl">
-                  Asset Maintenance, Compliance & Trade Services for Sydney & Surrounding Businesses
+                  Refrigeration Repairs & Property Maintenance in Sydney & Surrounds
                 </h1>
                 <p className="hero-subtitle text-base sm:text-lg xl:text-xl text-white max-w-3xl mt-5 leading-relaxed">
-                  One point of contact for proactive upkeep and rapid repairs.<br />
-                  We coordinate your trades and mandatory inspections so you can focus on your business.
+                  One point of contact for commercial property maintenance.<br />
+                  From refrigeration repairs to electrical services, we coordinate all your trades and mandatory inspections so you can focus on your business.
                 </p>
                 <div className="hero-ctas flex flex-col sm:flex-row items-start gap-4 mt-8">
                   <Link href="/contact">

@@ -8,7 +8,7 @@ import TestimonialsCarousel from '@/components/ui/TestimonialsCarousel';
 import HeroBanner from '@/components/ui/HeroBanner';
 import ServiceCards from '@/components/servicecards/ServiceCards';
 import FAQ from '@/components/servicecards/faq';
-const PageContactForm = dynamic(() => import('@/components/forms/PageContactForm'), {
+const ContactForm = dynamic(() => import('@/components/forms/ContactForm'), {
   ssr: false,
 });
 import HomeSpecialty from '@/components/layout/HomeSpecialty';
@@ -53,7 +53,7 @@ export default function Home() {
           <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1] tracking-[-0.02em] mb-8 text-[var(--text-primary)]">
             Get a Free Quote
           </h2>
-          <PageContactForm />
+          <ContactForm layout="wide" />
         </div>
       </SectionWrapper>
 
