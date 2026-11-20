@@ -211,7 +211,7 @@ export const services: Service[] = [
         desc: "Book a one-off job when you need it, or set up recurring visits on a schedule that suits your business. Either way, the work is arranged around your operating hours.",
       },
     ],
-    image: "/images/services/trades.webp",
+    image: "/images/services/other-commercial-services.webp",
     iconName: "Hammer",
   },
 ];
