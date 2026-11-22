@@ -6,22 +6,23 @@ import { Phone, Mail, MessageCircle } from 'lucide-react';
 import { BUSINESS } from '@/lib/constants';
 import { Card3DHover } from '@/components/ui/SimpleAnimations';
 
+// Card flow: icon → title → detail (the actual number / email / channel) → link.
 const contacts = [
   {
-    name: "Call Us",
-    desc: "Speak directly with our team",
+    name: "Call",
+    detail: BUSINESS.phone,
     icon: <Phone aria-hidden="true" className="w-8 h-8 stroke-1" />,
     href: `tel:${BUSINESS.phoneRaw}`,
   },
   {
-    name: "Email Us",
-    desc: "Send us a message anytime",
+    name: "Email",
+    detail: BUSINESS.email,
     icon: <Mail aria-hidden="true" className="w-8 h-8 stroke-1" />,
     href: `mailto:${BUSINESS.email}`,
   },
   {
     name: "WhatsApp",
-    desc: "Chat with us on WhatsApp",
+    detail: "Text Online",
     icon: <MessageCircle aria-hidden="true" className="w-8 h-8 stroke-1" />,
     href: BUSINESS.whatsappLink,
   },
@@ -58,7 +59,7 @@ export default function QuickContact({ cardClassName = 'bg-base' }: { cardClassN
               rel="noopener noreferrer"
               className={`
                 group
-                block
+                flex flex-col
                 h-full
                 ${cardClassName}
                 p-8
@@ -66,17 +67,25 @@ export default function QuickContact({ cardClassName = 'bg-base' }: { cardClassN
                 transition-all duration-[var(--transition-base)]
               `}
             >
-              <div className="icon-wrapper text-[var(--text-primary)] mb-7 transition-transform duration-[var(--transition-base)] origin-left">
-                {contact.icon}
+              {/* Icon + title on one row */}
+              <div className="flex items-center gap-4">
+                <div className="icon-wrapper text-[var(--text-primary)] shrink-0 transition-transform duration-[var(--transition-base)] origin-left">
+                  {contact.icon}
+                </div>
+                <h3 className="font-[family-name:var(--font-display)] text-[var(--text-primary)] text-[1.5rem] text-left leading-snug">
+                  {contact.name}
+                </h3>
               </div>
-              <h3 className="font-[family-name:var(--font-display)] text-[var(--text-primary)] text-[1.5rem] mb-3 text-left leading-snug">
-                {contact.name}
-              </h3>
-              <p className="text-[var(--text-secondary)] font-light text-sm leading-[var(--leading-relaxed)] mb-7 min-h-[48px] text-left">
-                {contact.desc}
+
+              {/* Detail: close to its title (8px) so they read as one pair; softer than the title */}
+              <p className="mt-7 text-[var(--text-secondary)] text-base text-left break-words">
+                {contact.detail}
               </p>
-              <div className="inline-flex items-center text-[0.6875rem] font-medium tracking-[0.12em] uppercase text-[var(--text-primary)] group-hover:text-[var(--text-accent)] transition-colors duration-[var(--transition-fast)] border-b md:border-b-2 border-current pb-0.5">
-                Contact now
+              {/* mt-auto keeps the link aligned at the bottom across cards */}
+              <div className="mt-auto pt-7">
+                <span className="inline-flex items-center text-[0.6875rem] font-medium tracking-[0.12em] uppercase text-[var(--text-primary)] group-hover:text-[var(--text-accent)] transition-colors duration-[var(--transition-fast)] border-b md:border-b-2 border-current pb-0.5">
+                  Contact now
+                </span>
               </div>
             </a>
           </motion.div>

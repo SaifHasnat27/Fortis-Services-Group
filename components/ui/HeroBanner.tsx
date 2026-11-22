@@ -60,14 +60,17 @@ export default function HeroBanner() {
                   From refrigeration repairs to electrical services, we coordinate all your trades and mandatory inspections so you can focus on your business.
                 </p>
                 <div className="hero-ctas flex flex-col sm:flex-row items-start gap-4 mt-8">
-                  <Link href="/contact">
+                  <a href={`tel:${BUSINESS.phoneRaw}`}>
+                    <Button variant="primary" size="md" className="w-full sm:w-auto" tabIndex={-1}>
+                      <Phone aria-hidden="true" className="w-4 h-4" />
+                      {/* Mobile: "Call Us Now" (tap to call). Desktop: show the number itself. */}
+                      <span className="md:hidden">Call Us Now</span>
+                      <span className="hidden md:inline">{BUSINESS.phone}</span>
+                    </Button>
+                  </a>
+                  <Link href="/contact#quote-form">
                     <Button variant="primary" size="md" className="w-full sm:w-auto">
                       Get a Free Quote
-                    </Button>
-                  </Link>
-                  <Link href="/services">
-                    <Button variant="primary" size="md" className="w-full sm:w-auto">
-                      Our Services
                     </Button>
                   </Link>
                 </div>

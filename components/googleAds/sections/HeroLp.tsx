@@ -17,10 +17,15 @@ export default function HeroLp({
   eyebrow,
   heading,
   subheading,
+  image,
+  imageAlt,
 }: {
   eyebrow: string;
   heading: string;
   subheading: string;
+  /** Square image, e.g. /images/Ads/cool-room.webp (used for mobile bg + desktop side image). */
+  image: string;
+  imageAlt: string;
 }) {
   return (
     <section className="relative overflow-hidden bg-base-secondary py-12 md:py-20">
@@ -28,10 +33,11 @@ export default function HeroLp({
           that fades into the page background at the bottom. md+: unchanged. */}
       <div aria-hidden="true" className="md:hidden">
         <Image
-          src="/images/services/commercial-refrigeration-service.webp"
+          src={image}
           alt=""
           fill
           priority
+          fetchPriority="high"
           sizes="(min-width: 1024px) 0px, 100vw"
           className="object-cover saturate-[0.6]"
         />
@@ -86,10 +92,11 @@ export default function HeroLp({
             No fixed ratio: stretches to the copy column's height and crops to fit. */}
         <div className="hidden md:block relative min-h-[420px] overflow-hidden border-[length:var(--border-width)] border-[color:var(--border)]">
           <Image
-            src="/images/services/commercial-refrigeration-service.webp"
-            alt="Technician repairing commercial refrigeration"
+            src={image}
+            alt={imageAlt}
             fill
             priority
+            fetchPriority="high"
             sizes="(min-width: 1024px) 35vw, 0px"
             className="object-cover"
           />

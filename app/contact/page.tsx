@@ -255,7 +255,10 @@ export default function ContactPage() {
           className="grid grid-cols-1 lg:grid-cols-12 gap-10"
         >
           {/* Form Card */}
-          <div className="lg:col-span-8 card !p-10 md:!p-12 form-card hover:border-[var(--border-dark)] transition-colors duration-[var(--transition-fast)]">
+          <div
+            id="quote-form"
+            className="lg:col-span-8 card !p-10 md:!p-12 form-card hover:border-[var(--border-dark)] transition-colors duration-[var(--transition-fast)] scroll-mt-[calc(var(--nav-height)+1.5rem)]"
+          >
             <p className="text-[0.6875rem] font-medium tracking-[0.18em] uppercase text-[var(--text-muted)] mb-4">
               We’re Here to Help.
             </p>
